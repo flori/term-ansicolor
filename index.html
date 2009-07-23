@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html 
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <title>Term::ANSIColor for Ruby</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  </head>
+  <body>
+
+    <ul id="linkbox">
+      <li><a href="http://term-ansicolor.rubyforge.org/index.html">Homepage</a></li>
+      <li><a href="http://github.com/flori/term-ansicolor/tree/master">Github Repository</a></li>
+      <li><a href="http://rubyforge.org/projects/term-ansicolor">Rubyforge Project</a></li>
+      <li><a href="http://rubyforge.org/frs/?group_id=391">Download</a></li>
+      <li><a href="doc/index.html">Documentation</a></li>
+      
+    </ul>
+
+    <div id="content">
+      <h1>term-ansicolor &ndash; Term::ANSIColor for Ruby</h1>
+
+<h2>Description</h2>
+<p>
+Small Ruby library that colors strings using ANSI escape sequences. It's
+possible to use constants:
+</p>
+<pre>
+require 'term/ansicolor'
+include Term::ANSIColor
+print red, bold, "red bold", reset, "\n"
+</pre>
+<p>
+Or unary functions:
+</p>
+<pre>
+include Term::ANSIColor
+print red(bold("red bold")), "\n"
+</pre>
+<p>
+Blockforms do also autoreset at the block's end:
+</p>
+<pre>
+include Term::ANSIColor
+print red { bold { "red bold" } }, "\n"
+</pre>
+<p>
+It's also possible to use this module as Mixin for classes of objects that
+respond to :to_str, e. g. String.
+</p>
+<pre>
+class String
+  include Term::ANSIColor
+end
+print "red bold".red.bold, "\n"
+</pre>
+
+<h2>Installation</h2>
+<p>
+The library can be installed via rubygems:
+</p>
+<pre>
+# gem install term-ansicolor
+</pre>
+<p>
+The gem and the source archive can also be <a
+href="http://rubyforge.org/frs/?group_id=391">downloaded</a> directly from rubyforge.org.
+</p>
+
+      <h2>Author</h2>
+      Florian Frank &lt;<a href="mailto:flori@ping.de">flori@ping.de</a>&gt;
+
+<h2>License</h2>
+<p>
+This is free software; you can redistribute it and/or modify it under the terms
+of the GNU General Public License Version 2 as published by the Free Software
+Foundation: <a href="http://www.gnu.org/copyleft/gpl.html">GNU GPL</a>.
+</p>
+
+    </div>
+    <p class="valid">
+      <a href="http://validator.w3.org/check?uri=referer"><img
+        src="http://www.w3.org/Icons/valid-xhtml10"
+        alt="Valid XHTML 1.0 Transitional" height="31" width="88" /></a>
+    </p>
+  </body>
+</html>
+

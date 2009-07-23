@@ -1,0 +1,11 @@
+{
+  "author":"Florian Frank",
+  "author_email":"flori@ping.de",
+  "documentation_url":"doc/index.html",
+  "download_url":"http:\/\/rubyforge.org\/frs\/?group_id=391",
+  "github_url": "http:\/\/github.com\/flori\/term-ansicolor\/tree\/master",
+  "homepage_url":"http:\/\/term-ansicolor.rubyforge.org",
+  "project_name":"Term::ANSIColor for Ruby",
+  "project_unixname":"term-ansicolor",
+  "project_url":"http:\/\/rubyforge.org\/projects\/term-ansicolor"
+}

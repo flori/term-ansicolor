@@ -1,0 +1,34 @@
+<h2>Description</h2>
+<p>
+Small Ruby library that colors strings using ANSI escape sequences. It's
+possible to use constants:
+</p>
+<pre>
+require 'term/ansicolor'
+include Term::ANSIColor
+print red, bold, "red bold", reset, "\n"
+</pre>
+<p>
+Or unary functions:
+</p>
+<pre>
+include Term::ANSIColor
+print red(bold("red bold")), "\n"
+</pre>
+<p>
+Blockforms do also autoreset at the block's end:
+</p>
+<pre>
+include Term::ANSIColor
+print red { bold { "red bold" } }, "\n"
+</pre>
+<p>
+It's also possible to use this module as Mixin for classes of objects that
+respond to :to_str, e. g. String.
+</p>
+<pre>
+class String
+  include Term::ANSIColor
+end
+print "red bold".red.bold, "\n"
+</pre>
