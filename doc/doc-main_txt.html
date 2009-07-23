@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>File: doc-main.txt [RDoc Documentation]</title>
+
+	<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet" />
+
+	<script src="./js/jquery.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/thickbox-compressed.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/quicksearch.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/darkfish.js" type="text/javascript"
+		charset="utf-8"></script>
+</head>
+
+<body class="file">
+	<div id="metadata">
+		<div id="project-metadata">
+			
+			
+			<div id="fileindex-section" class="section project-section">
+				<h3 class="section-header">Files</h3>
+				<ul>
+				
+					<li class="file"><a href="./doc-main_txt.html">doc-main.txt</a></li>
+				
+				</ul>
+			</div>
+			
+
+			<div id="classindex-section" class="section project-section">
+				<h3 class="section-header">Class Index
+					<span class="search-toggle"><img src="./images/find.png"
+						height="16" width="16" alt="[+]"
+						title="show/hide quicksearch" /></span></h3>
+				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+				<fieldset>
+					<legend>Quicksearch</legend>
+					<input type="text" name="quicksearch" value=""
+						class="quicksearch-field" />
+				</fieldset>
+				</form>
+
+				<ul class="link-list">
+				
+					<li><a href="./Term.html">Term</a></li>
+				
+					<li><a href="./Term/ANSIColor.html">Term::ANSIColor</a></li>
+				
+				</ul>
+				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+			</div>
+
+			
+		</div>
+	</div>
+
+	<div id="documentation">
+		<h2><a href="Term/ANSIColor.html">Term::ANSIColor</a> - ANSI escape sequences in Ruby</h2>
+<h3>Description</h3>
+<p>
+This library can be used to color/uncolor strings using ANSI escape
+sequences.
+</p>
+<h3>Author</h3>
+<p>
+Florian Frank <a href="mailto:flori@ping.de">flori@ping.de</a>
+</p>
+<h3>License</h3>
+<p>
+This is free software; you can redistribute it and/or modify it under the
+terms of the GNU General Public License Version 2 as published by the Free
+Software Foundation: <a
+href="http://www.gnu.org/copyleft/gpl.html">www.gnu.org/copyleft/gpl.html</a>
+</p>
+<h3>Download</h3>
+<p>
+The latest version of this library can be downloaded at
+</p>
+<ul>
+<li><a
+href="http://rubyforge.org/frs?group_id=391">rubyforge.org/frs?group_id=391</a>
+
+</li>
+</ul>
+<p>
+The homepage of this library is located at
+</p>
+<ul>
+<li><a
+href="http://term-ansicolor.rubyforge.org">term-ansicolor.rubyforge.org</a>
+
+</li>
+</ul>
+<h3>Examples</h3>
+<p>
+The file examples/example.rb in the source/gem-distribution shows how this
+library can be used:
+</p>
+<pre>
+ require 'term/ansicolor'
+
+ # Use this trick to work around namespace cluttering that
+ # happens if you just include Term::ANSIColor:
+
+ class Color
+   class &lt;&lt; self
+     include Term::ANSIColor
+   end
+ end
+
+ print Color.red, Color.bold, &quot;No Namespace cluttering:&quot;, Color.clear, &quot;\n&quot;
+ print Color.green + &quot;green&quot; + Color.clear, &quot;\n&quot;
+ print Color.on_red(Color.green(&quot;green&quot;)), &quot;\n&quot;
+ print Color.yellow { Color.on_black { &quot;yellow on_black&quot; } }, &quot;\n\n&quot;
+
+ # Or shortcut Term::ANSIColor by assignment:
+ c = Term::ANSIColor
+
+ print c.red, c.bold, &quot;No Namespace cluttering (alternative):&quot;, c.clear, &quot;\n&quot;
+ print c.green + &quot;green&quot; + c.clear, &quot;\n&quot;
+ print c.on_red(c.green(&quot;green&quot;)), &quot;\n&quot;
+ print c.yellow { c.on_black { &quot;yellow on_black&quot; } }, &quot;\n\n&quot;
+
+ # Anyway, I don't define any of Term::ANSIColor's methods in this example
+ # and I want to keep it short:
+ include Term::ANSIColor
+
+ print red, bold, &quot;Usage as constants:&quot;, reset, &quot;\n&quot;
+ print clear, &quot;clear&quot;, reset, reset, &quot;reset&quot;, reset,
+   bold, &quot;bold&quot;, reset, dark, &quot;dark&quot;, reset,
+   underscore, &quot;underscore&quot;, reset, blink, &quot;blink&quot;, reset,
+   negative, &quot;negative&quot;, reset, concealed, &quot;concealed&quot;, reset, &quot;|\n&quot;,
+   black, &quot;black&quot;, reset, red, &quot;red&quot;, reset, green, &quot;green&quot;, reset,
+   yellow, &quot;yellow&quot;, reset, blue, &quot;blue&quot;, reset, magenta, &quot;magenta&quot;, reset,
+   cyan, &quot;cyan&quot;, reset, white, &quot;white&quot;, reset, &quot;|\n&quot;,
+   on_black, &quot;on_black&quot;, reset, on_red, &quot;on_red&quot;, reset,
+   on_green, &quot;on_green&quot;, reset, on_yellow, &quot;on_yellow&quot;, reset,
+   on_blue, &quot;on_blue&quot;, reset, on_magenta, &quot;on_magenta&quot;, reset,
+   on_cyan, &quot;on_cyan&quot;, reset, on_white, &quot;on_white&quot;, reset, &quot;|\n\n&quot;
+
+ print red, bold, &quot;Usage as unary argument methods:&quot;, reset, &quot;\n&quot;
+ print clear(&quot;clear&quot;), reset(&quot;reset&quot;), bold(&quot;bold&quot;), dark(&quot;dark&quot;),
+   underscore(&quot;underscore&quot;), blink(&quot;blink&quot;), negative(&quot;negative&quot;),
+   concealed(&quot;concealed&quot;), &quot;|\n&quot;,
+   black(&quot;black&quot;), red(&quot;red&quot;), green(&quot;green&quot;), yellow(&quot;yellow&quot;),
+   blue(&quot;blue&quot;), magenta(&quot;magenta&quot;), cyan(&quot;cyan&quot;), white(&quot;white&quot;), &quot;|\n&quot;,
+   on_black(&quot;on_black&quot;), on_red(&quot;on_red&quot;), on_green(&quot;on_green&quot;),#
+   on_yellow(&quot;on_yellow&quot;), on_blue(&quot;on_blue&quot;), on_magenta(&quot;on_magenta&quot;),
+   on_cyan(&quot;on_cyan&quot;), on_white(&quot;on_white&quot;), &quot;|\n\n&quot;
+
+ print red { bold { &quot;Usage as block forms:&quot; } }, &quot;\n&quot;
+ print clear { &quot;clear&quot; }, reset { &quot;reset&quot; }, bold { &quot;bold&quot; },
+   dark { &quot;dark&quot; }, underscore { &quot;underscore&quot; }, blink { &quot;blink&quot; },
+   negative { &quot;negative&quot; }, concealed { &quot;concealed&quot; }, &quot;|\n&quot;,
+   black { &quot;black&quot; }, red { &quot;red&quot; }, green { &quot;green&quot; },
+   yellow { &quot;yellow&quot; }, blue { &quot;blue&quot; }, magenta { &quot;magenta&quot; },
+   cyan { &quot;cyan&quot; }, white { &quot;white&quot; }, &quot;|\n&quot;,
+   on_black { &quot;on_black&quot; }, on_red { &quot;on_red&quot; }, on_green { &quot;on_green&quot; },
+   on_yellow { &quot;on_yellow&quot; }, on_blue { &quot;on_blue&quot; },
+   on_magenta { &quot;on_magenta&quot; }, on_cyan { &quot;on_cyan&quot; },
+   on_white { &quot;on_white&quot; }, &quot;|\n\n&quot;
+
+ # Usage as Mixin into String or its Subclasses
+ class String
+   include Term::ANSIColor
+ end
+
+ print &quot;Usage as String Mixins:&quot;.red.bold, &quot;\n&quot;
+ print &quot;clear&quot;.clear, &quot;reset&quot;.reset, &quot;bold&quot;.bold, &quot;dark&quot;.dark,
+   &quot;underscore&quot;.underscore, &quot;blink&quot;.blink, &quot;negative&quot;.negative,
+   &quot;concealed&quot;.concealed, &quot;|\n&quot;,
+   &quot;black&quot;.black, &quot;red&quot;.red, &quot;green&quot;.green, &quot;yellow&quot;.yellow,
+   &quot;blue&quot;.blue, &quot;magenta&quot;.magenta, &quot;cyan&quot;.cyan, &quot;white&quot;.white, &quot;|\n&quot;,
+   &quot;on_black&quot;.on_black, &quot;on_red&quot;.on_red, &quot;on_green&quot;.on_green,
+   &quot;on_yellow&quot;.on_yellow, &quot;on_blue&quot;.on_blue, &quot;on_magenta&quot;.on_magenta,
+   &quot;on_cyan&quot;.on_cyan, &quot;on_white&quot;.on_white, &quot;|\n\n&quot;
+
+ symbols = Term::ANSIColor::attributes
+ print red { bold { &quot;All supported attributes = &quot; } },
+   blue { symbols.inspect }, &quot;\n\n&quot;
+
+ print &quot;Send symbols to strings:&quot;.send(:red).send(:bold), &quot;\n&quot;
+ print symbols[12, 8].map { |c| c.to_s.send(c) }, &quot;\n\n&quot;
+
+ print red { bold { &quot;Make strings monochromatic again:&quot; } }, &quot;\n&quot;
+ print [ &quot;red&quot;.red, &quot;not red anymore&quot;.red.uncolored,
+   uncolored { &quot;not red anymore&quot;.red }, uncolored(&quot;not red anymore&quot;.red)
+     ].map { |x| x + &quot;\n&quot; }
+</pre>
+
+	</div>
+
+	<div id="validator-badges">
+		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+			Rdoc Generator</a> 1.1.6</small>.</p>
+	</div>
+</body>
+</html>
+
