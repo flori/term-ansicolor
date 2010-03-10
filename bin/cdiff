@@ -1,13 +1,11 @@
 #!/usr/bin/env ruby
 #
-## Little unix filter that colorizes diff output if STDOUT is a tty.
+## Little unix filter that colorizes diff output.
 #
 
 require 'term/ansicolor'
 
 include Term::ANSIColor
-
-Term::ANSIColor.coloring = STDOUT.isatty
 
 ARGF.each do |line|
   STDOUT.print(
