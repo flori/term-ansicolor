@@ -35,7 +35,7 @@ if defined? Gem
 
     s.has_rdoc = true
     s.extra_rdoc_files << 'doc-main.txt'
-    s.executables << 'cdiff'
+    s.executables << 'cdiff' << 'uncolor'
     s.rdoc_options << '--main' <<  'doc-main.txt'
 
     s.author = "Florian Frank"
