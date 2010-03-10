@@ -1,3 +1,5 @@
+2010-03-10 - 1.0.5 * Added cdiff example as an executable.
+                   * Disabled building of gemspec file.
 2009-07-23 - 1.0.4 * Some cleanup.
                    * Build a gemspec file.
 2007-10-05 - 1.0.3 * Better documentation + some code clean up.

@@ -1,14 +1,16 @@
 #!/usr/bin/env ruby
 #
-## Little unix filter that colorizes diff output
+## Little unix filter that colorizes diff output if STDOUT is a tty.
 #
 
 require 'term/ansicolor'
 
 include Term::ANSIColor
 
+Term::ANSIColor.coloring = STDOUT.isatty
+
 ARGF.each do |line|
-  print(
+  STDOUT.print(
     case line
     when /^\+/ then green { line }
     when /^-/ then red { line }
