@@ -60,7 +60,7 @@ class ANSIColorTest < Test::Unit::TestCase
       assert_not_equal foo, foo_colored = Term::ANSIColor.__send__(a) { foo }
       assert_equal foo, Term::ANSIColor.uncolored { foo_colored }
       assert_not_equal foo, foo_colored = __send__(a) { foo }
-      assert_equal foo, uncolored { foo }
+      assert_equal foo, uncolored { foo_colored }
     end
   end
 end
