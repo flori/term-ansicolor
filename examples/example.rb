@@ -4,9 +4,7 @@ require 'term/ansicolor'
 # happens if you just include Term::ANSIColor:
 
 class Color
-  class << self
-    include Term::ANSIColor
-  end
+  extend Term::ANSIColor
 end
 
 print Color.red, Color.bold, "No Namespace cluttering:", Color.clear, "\n"
@@ -84,6 +82,9 @@ print "Send symbols to strings:".send(:red).send(:bold), "\n"
 print symbols[12, 8].map { |c| c.to_s.send(c) }, "\n\n"
 
 print red { bold { "Make strings monochromatic again:" } }, "\n"
-print [ "red".red, "not red anymore".red.uncolored,
-  uncolored { "not red anymore".red }, uncolored("not red anymore".red)
-    ].map { |x| x + "\n" }
+print [
+    "red".red,
+    "not red anymore".red.uncolored,
+    uncolored { "not red anymore".red },
+    uncolored("not red anymore".red)
+  ].map { |x| x + "\n" }

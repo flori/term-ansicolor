@@ -34,9 +34,10 @@ if defined? Gem
     s.require_path = 'lib'
 
     s.has_rdoc = true
-    s.extra_rdoc_files << 'doc-main.txt'
-    s.executables << 'cdiff' << 'uncolor'
-    s.rdoc_options << '--main' <<  'doc-main.txt'
+    s.extra_rdoc_files << 'README'
+    s.executables << 'cdiff' << 'decolor'
+    s.rdoc_options << '--main' <<  'README' << '--title' << 'Term::ANSIColor'
+    s.test_files = Dir['tests/*.rb']
 
     s.author = "Florian Frank"
     s.email = "flori@ping.de"
@@ -67,6 +68,17 @@ module Term
 end
 EOT
   end
+end
+
+desc "Run tests"
+task :tests do
+  sh 'testrb -Ilib tests/*.rb'
+end
+task :test => :tests
+
+desc "Run tests with coverage"
+task :coverage do
+  sh 'rcov -Ilib tests/*.rb'
 end
 
 desc "Default"

@@ -1,6 +1,9 @@
 2010-03-10 - 1.0.5 * Added cdiff example as an executable.
                    * Disabled building of gemspec file.
-                   * Made an uncolor executable, that removes colors from an io stream.
+                   * Made an decolor executable, that removes colors from an io
+                     stream.
+                   * Match an additional way to clear the color in the
+                     COLORED_REGEXP for the uncolored method.
 2009-07-23 - 1.0.4 * Some cleanup.
                    * Build a gemspec file.
 2007-10-05 - 1.0.3 * Better documentation + some code clean up.

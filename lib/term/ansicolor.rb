@@ -63,7 +63,7 @@ module Term
             elsif string
               result << string
             elsif respond_to?(:to_str)
-              result << self
+              result << to_str
             else
               return result #only switch on
             end
@@ -75,7 +75,7 @@ module Term
 
     # Regular expression that is used to scan for ANSI-sequences while
     # uncoloring strings.
-    COLORED_REGEXP = /\e\[([34][0-7]|[0-9])m/
+    COLORED_REGEXP = /\e\[(?:[34][0-7]|[0-9])?m/
 
     # Returns an uncolored version of the string, that is all
     # ANSI-sequences are stripped from the string.
@@ -85,7 +85,7 @@ module Term
       elsif string
         string.gsub(COLORED_REGEXP, '')
       elsif respond_to?(:to_str)
-        gsub(COLORED_REGEXP, '')
+        to_str.gsub(COLORED_REGEXP, '')
       else
         ''
       end

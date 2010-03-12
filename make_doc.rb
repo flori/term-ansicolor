@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 
 puts "Creating documentation."
-system "rdoc --main doc-main.txt -d doc-main.txt #{Dir['lib/**/*.rb'] * ' '}"
+system "rdoc --title 'Term::ANSIColor' --main README -d README #{Dir['lib/**/*.rb'] * ' '}"
