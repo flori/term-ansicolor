@@ -18,9 +18,10 @@ class ANSIColorTest < Test::Unit::TestCase
     @string = "red"
     @string_red = "\e[31mred\e[0m"
     @string_red_on_green = "\e[42m\e[31mred\e[0m\e[0m"
+    @string_red_escaped = "\\[\e[31m\\]red\e[0m\\]"
   end
 
-  attr_reader :string, :string_red, :string_red_on_green
+  attr_reader :string, :string_red, :string_red_on_green, :string_red_escaped
 
   def test_red
     assert_equal string_red, string.red
@@ -29,6 +30,7 @@ class ANSIColorTest < Test::Unit::TestCase
     assert_equal string_red, Term::ANSIColor.red { string }
     assert_equal string_red, red { string }
   end
+
 
   def test_red_on_green
     assert_equal string_red_on_green, string.red.on_green
@@ -63,4 +65,11 @@ class ANSIColorTest < Test::Unit::TestCase
       assert_equal foo, uncolored { foo }
     end
   end
+
+  def test_red_escaped
+    Term::ANSIColor.escaped = true
+    assert_equal string_red_escaped, "red".red
+    Term::ANSIColor.escaped = false
+  end
+
 end

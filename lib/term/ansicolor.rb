@@ -53,11 +53,27 @@ module Term
     end
     self.coloring = true
 
+    # Returns true, if the shell escaping function of this module is switched on.
+    def self.escaped?
+      @escaped
+    end
+
+    # Turns shell escaping on or off globally
+    def self.escaped=(val)
+      @escaped = val
+    end
+    self.escaped = false
+
+
     ATTRIBUTES.each do |c, v|
       eval %Q{
           def #{c}(string = nil)
             result = ''
-            result << "\e[#{v}m" if Term::ANSIColor.coloring?
+            if Term::ANSIColor.coloring?
+              result << '\\[' if Term::ANSIColor.escaped?
+              result << "\e[#{v}m"
+              result << '\\]' if Term::ANSIColor.escaped?
+            end
             if block_given?
               result << yield
             elsif string
@@ -65,9 +81,13 @@ module Term
             elsif respond_to?(:to_str)
               result << to_str
             else
+              result << '\\]' if Term::ANSIColor.escaped?
               return result #only switch on
             end
-            result << "\e[0m" if Term::ANSIColor.coloring?
+            if Term::ANSIColor.coloring?
+              result << "\e[0m"
+              result << '\\]' if Term::ANSIColor.escaped?
+            end
             result
           end
       }
