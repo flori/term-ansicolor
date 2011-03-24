@@ -77,6 +77,14 @@ module Term
     # uncoloring strings.
     COLORED_REGEXP = /\e\[(?:[34][0-7]|[0-9])?m/
 
+
+    def self.included(klass)
+      if version_is_greater_than_18? and klass == String
+        ATTRIBUTES.delete(:clear)
+        ATTRIBUTE_NAMES.delete(:clear)
+      end
+    end
+
     # Returns an uncolored version of the string, that is all
     # ANSI-sequences are stripped from the string.
     def uncolored(string = nil) # :yields:
@@ -98,5 +106,13 @@ module Term
       ATTRIBUTE_NAMES
     end
     extend self
+
+    private
+
+    def version_is_greater_than_18?
+      version = RUBY_VERSION.split('.')
+      version.map! &:to_i
+      version[0] >= 1 && version[1] > 8
+    end
   end
 end
