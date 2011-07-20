@@ -48,6 +48,34 @@ class ANSIColorTest < Test::Unit::TestCase
     assert_equal string, uncolored { string }
   end
 
+  def test_html_red
+    red_html = '<span class="ansi-color ansi-red" style="color: red">red</span>'
+    assert_equal red_html, @string_red.to_html
+    assert_equal red_html, Term::ANSIColor.to_html(@string_red)
+    assert_equal red_html, Term::ANSIColor.to_html { @string_red }
+  end
+
+  def test_html_red_on_green
+    red_on_green_html = '<span class="ansi-color ansi-on-green" style="background-color: green"><span class="ansi-color ansi-red" style="color: red">red</span></span>'
+    assert_equal red_on_green_html, @string_red_on_green.to_html
+    assert_equal red_on_green_html, Term::ANSIColor.to_html(@string_red_on_green)
+    assert_equal red_on_green_html, Term::ANSIColor.to_html { @string_red_on_green }
+  end
+
+  def test_html_with_options
+    options = {:no_style => true}
+    red_html = '<span class="ansi-color ansi-red">red</span>'
+    assert_equal red_html, @string_red.to_html(options)
+    assert_equal red_html, Term::ANSIColor.to_html(@string_red, options)
+    assert_equal red_html, Term::ANSIColor.to_html(options) { @string_red }
+  end
+
+  def test_html_styles
+    assert_equal ' style="font-weight: bold"', Term::ANSIColor::HTML.style(1)
+    assert_equal ' style="text-decoration: underline"', Term::ANSIColor::HTML.style(4)
+    assert_equal ' style="text-decoration: blink"', Term::ANSIColor::HTML.style(5)
+  end
+
   def test_attributes
     foo = 'foo'
     for (a, _) in Term::ANSIColor.attributes

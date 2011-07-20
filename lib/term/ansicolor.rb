@@ -3,6 +3,10 @@ require 'term/ansicolor/version'
 module Term
   # The ANSIColor module can be used for namespacing and mixed into your own
   # classes.
+
+  # autoloading Term::ANSIColor::HTML
+  autoload :HTML, 'term/ansicolor/html'
+
   module ANSIColor
     # :stopdoc:
     ATTRIBUTES = [
@@ -75,7 +79,7 @@ module Term
 
     # Regular expression that is used to scan for ANSI-sequences while
     # uncoloring strings.
-    COLORED_REGEXP = /\e\[(?:[34][0-7]|[0-9])?m/
+    COLORED_REGEXP = /\e\[([34][0-7]|[0-9])?m/
 
     # Returns an uncolored version of the string, that is all
     # ANSI-sequences are stripped from the string.
@@ -89,6 +93,23 @@ module Term
       else
         ''
       end
+    end
+
+    # Return html string
+    # options[:no_style] = true #=> no render style attribute
+    def to_html(string = nil, options = {})
+      target = if block_given?
+                 options = string if string.kind_of?(Hash)
+                 yield
+               elsif string && !string.kind_of?(Hash)
+                 string
+               elsif respond_to?(:to_str)
+                 options = string if string.kind_of?(Hash)
+                 to_str
+               else
+                 ''
+               end
+      HTML.convert(target, options)
     end
 
     module_function
