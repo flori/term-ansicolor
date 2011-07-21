@@ -1,10 +1,10 @@
-== ANSI escape sequences in Ruby
+= Term::ANSIColor - ANSI escape sequences in Ruby
 
-=== Description
+== Description
 
 This library can be used to color/decolor strings using ANSI escape sequences.
 
-=== Installation
+== Installation
 
 Just type into the command line as root:
 
@@ -19,7 +19,7 @@ installs it for you:
 
 # gem install term-ansicolor
 
-=== Download
+== Download
 
 The latest version of this library can be downloaded at
 
@@ -29,7 +29,7 @@ The homepage of this library is located at
 
 * http://flori.github.com/term-ansicolor
 
-=== Examples
+== Examples
 
 Additional to the two executables cdiff and decolor, the file
 examples/example.rb in the source/gem-distribution shows how this library can
@@ -126,11 +126,11 @@ be used:
         uncolored("not red anymore".red)
       ].map { |x| x + "\n" }
 
-=== Author
+== Author
 
 Florian Frank mailto:flori@ping.de
 
-=== License
+== License
 
 This is free software; you can redistribute it and/or modify it under the
 terms of the GNU General Public License Version 2 as published by the Free

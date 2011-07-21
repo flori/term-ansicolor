@@ -1,6 +1,6 @@
-require 'term/ansicolor/version'
-
 module Term
+  require 'term/ansicolor/version'
+
   # The ANSIColor module can be used for namespacing and mixed into your own
   # classes.
   module ANSIColor
