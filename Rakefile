@@ -49,6 +49,12 @@ if defined? Gem
     pkg.need_tar = true
     pkg.package_files += PKG_FILES
   end
+
+  desc "Generate gemspec file"
+  task :gemspec do
+    File.open('term-ansicolor.gemspec', 'w') {|f| f.puts spec.to_ruby }
+    puts "Generated: term-ansicolor.gemspec"
+  end
 end
 
 desc m = "Writing version information for #{PKG_VERSION}"
