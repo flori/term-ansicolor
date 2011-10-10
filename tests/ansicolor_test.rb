@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'test/unit'
-require 'term/ansicolor'
+require File.expand_path(File.join('lib', 'term', 'ansicolor'))
 
 class String
   include Term::ANSIColor
@@ -50,8 +50,9 @@ class ANSIColorTest < Test::Unit::TestCase
 
   def test_attributes
     foo = 'foo'
-    for (a, _) in Term::ANSIColor.attributes
-      assert_not_equal foo, foo_colored = foo.__send__(a)
+    Term::ANSIColor.attributes.each do |a, ignored|
+      foo_colored = foo.__send__(a)
+      assert_not_equal foo, foo_colored, a.inspect
       assert_equal foo, foo_colored.uncolored
       assert_not_equal foo, foo_colored = Color.__send__(a, foo)
       assert_equal foo, Color.uncolored(foo_colored)
