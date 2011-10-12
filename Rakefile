@@ -12,7 +12,7 @@ GemHadar do
   summary     'Ruby library that colors strings using ANSI escape sequences'
   description ''
   test_dir    'tests'
-  ignore      '.*.sw[pon]', 'pkg', 'Gemfile.lock'
+  ignore      '.*.sw[pon]', 'pkg', 'Gemfile.lock', '.rvmrc'
   readme      'README.rdoc'
   executables << 'cdiff' << 'decolor'
 
