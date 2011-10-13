@@ -79,7 +79,7 @@ print red { bold { "All supported attributes = " } },
   blue { symbols.inspect }, "\n\n"
 
 print "Send symbols to strings:".send(:red).send(:bold), "\n"
-print symbols[12, 8].map { |c| c.to_s.send(c) }, "\n\n"
+print symbols[12, 8].map { |c| c.to_s.send(c) } * '', "\n\n"
 
 print red { bold { "Make strings monochromatic again:" } }, "\n"
 print [
@@ -87,4 +87,4 @@ print [
     "not red anymore".red.uncolored,
     uncolored { "not red anymore".red },
     uncolored("not red anymore".red)
-  ].map { |x| x + "\n" }
+  ].map { |x| x + "\n" } * ''
