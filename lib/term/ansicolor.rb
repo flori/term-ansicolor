@@ -7,7 +7,7 @@ module Term
 
     # :stopdoc:
     ATTRIBUTES = [
-      [ :clear              ,   0 ], 
+      [ :clear              ,   0 ],     # String#clear is already used to empty string in Ruby 1.9
       [ :reset              ,   0 ],     # synonym for :clear
       [ :bold               ,   1 ], 
       [ :dark               ,   2 ], 
@@ -56,6 +56,18 @@ module Term
     ATTRIBUTE_NAMES = ATTRIBUTES.transpose.first
     # :startdoc:
 
+    # Returns true if Term::ANSIColor supports the +feature+.
+    #
+    # The feature :clear, that is mixing the clear color attribute into String,
+    # is only supported on ruby implementations, that do *not* already
+    # implement the String#clear method. It's better to use the reset color
+    # attribute instead.
+    def support?(feature)
+      case feature
+      when :clear
+        !String.instance_methods(false).map(&:to_sym).include?(:clear)
+      end
+    end
     # Returns true, if the coloring function of this module
     # is switched on, false otherwise.
     def self.coloring?
@@ -71,36 +83,36 @@ module Term
     self.coloring = true
 
     ATTRIBUTES.each do |c, v|
-      eval %Q{
-          def #{c}(string = nil)
-            result = ''
-            result << "\e[#{v}m" if Term::ANSIColor.coloring?
-            if block_given?
-              result << yield
-            elsif string
-              result << string
-            elsif respond_to?(:to_str)
-              result << to_str
-            else
-              return result #only switch on
-            end
-            result << "\e[0m" if Term::ANSIColor.coloring?
-            result
+      eval <<-EOT
+        def #{c}(string = nil)
+          result = ''
+          result << "\e[#{v}m" if Term::ANSIColor.coloring?
+          if block_given?
+            result << yield
+          elsif string.respond_to?(:to_str)
+            result << string.to_str
+          elsif respond_to?(:to_str)
+            result << to_str
+          else
+            return result #only switch on
           end
-      }
+          result << "\e[0m" if Term::ANSIColor.coloring?
+          result
+        end
+      EOT
     end
 
     # Regular expression that is used to scan for ANSI-sequences while
     # uncoloring strings.
-    COLORED_REGEXP = /\e\[(?:[34][0-7]|[0-9])?m/
+    COLORED_REGEXP = /\e\[(?:(?:[349]|10)[0-7]|[0-9])?m/
 
     # Returns an uncolored version of the string, that is all
     # ANSI-sequences are stripped from the string.
     def uncolored(string = nil) # :yields:
       if block_given?
-        yield.gsub(COLORED_REGEXP, '')
-      elsif string
-        string.gsub(COLORED_REGEXP, '')
+        yield.to_str.gsub(COLORED_REGEXP, '')
+      elsif string.respond_to?(:to_str)
+        string.to_str.gsub(COLORED_REGEXP, '')
       elsif respond_to?(:to_str)
         to_str.gsub(COLORED_REGEXP, '')
       else
