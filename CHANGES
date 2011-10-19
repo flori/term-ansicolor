@@ -1,3 +1,9 @@
+2011-10-19 - 1.0.8 * Cleanup documentation.
+2011-10-13 - 1.0.7 * Merged patch by Mike Bethany <mikbe.tk@gmail.com> that
+                     adds high intensity colors and backgrounds.
+                   * Fix problem caused by Ruby 1.9 implementing String#clear
+                   * now, reported by Joe Fiorini <joe@joefiorini.com>.
+2011-07-21 - 1.0.6 * Use gem_hadar for building.
 2010-03-10 - 1.0.5 * Added cdiff example as an executable.
                    * Disabled building of gemspec file.
                    * Made an decolor executable, that removes colors from an io
