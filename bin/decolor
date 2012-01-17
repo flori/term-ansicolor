@@ -5,7 +5,7 @@
 
 require 'term/ansicolor'
 
-include Term::ANSIColor
+include ANSITerm::ANSIColor
 
 ARGF.each do |line|
   puts line.uncolored
