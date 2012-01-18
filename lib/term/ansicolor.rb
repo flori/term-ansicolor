@@ -1,4 +1,4 @@
-module Term
+module ANSITerm
 
   # The ANSIColor module can be used for namespacing and mixed into your own
   # classes.
@@ -56,7 +56,7 @@ module Term
     ATTRIBUTE_NAMES = ATTRIBUTES.transpose.first
     # :startdoc:
 
-    # Returns true if Term::ANSIColor supports the +feature+.
+    # Returns true if ANSITerm::ANSIColor supports the +feature+.
     #
     # The feature :clear, that is mixing the clear color attribute into String,
     # is only supported on ruby implementations, that do *not* already
@@ -76,7 +76,7 @@ module Term
 
     # Turns the coloring on or off globally, so you can easily do
     # this for example:
-    #  Term::ANSIColor::coloring = STDOUT.isatty
+    #  ANSITerm::ANSIColor::coloring = STDOUT.isatty
     def self.coloring=(val)
       @coloring = val
     end
@@ -86,7 +86,7 @@ module Term
       eval <<-EOT
         def #{c}(string = nil)
           result = ''
-          result << "\e[#{v}m" if Term::ANSIColor.coloring?
+          result << "\e[#{v}m" if ANSITerm::ANSIColor.coloring?
           if block_given?
             result << yield
           elsif string.respond_to?(:to_str)
@@ -96,7 +96,7 @@ module Term
           else
             return result #only switch on
           end
-          result << "\e[0m" if Term::ANSIColor.coloring?
+          result << "\e[0m" if ANSITerm::ANSIColor.coloring?
           result
         end
       EOT
@@ -122,7 +122,7 @@ module Term
 
     module_function
 
-    # Returns an array of all Term::ANSIColor attributes as symbols.
+    # Returns an array of all ANSITerm::ANSIColor attributes as symbols.
     def attributes
       ATTRIBUTE_NAMES
     end
