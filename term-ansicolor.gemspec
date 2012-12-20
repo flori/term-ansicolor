@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.email = %q{flori@ping.de}
   s.executables = ["cdiff", "decolor"]
   s.extra_rdoc_files = ["README"]
-  s.files = ["CHANGES", "COPYING", "README", "Rakefile", "VERSION", "bin", "bin/ansi2html", "bin/cdiff", "bin/decolor", "default.gems", "examples", "examples/example.rb", "install.rb", "lib", "lib/term", "lib/term/ansicolor", "lib/term/ansicolor.rb", "lib/term/ansicolor/html.rb", "lib/term/ansicolor/version.rb", "term-ansicolor.gem", "test.watchr", "tests", "tests/ansicolor_test.rb"]
+  s.files = ["CHANGES", "COPYING", "README", "Rakefile", "VERSION", "bin", "bin/cdiff", "bin/decolor", "examples", "examples/example.rb", "install.rb", "lib", "lib/term", "lib/term/ansicolor", "lib/term/ansicolor.rb", "lib/term/ansicolor/html.rb", "lib/term/ansicolor/version.rb", "tests", "tests/ansicolor_test.rb"]
   s.homepage = %q{http://flori.github.com/term-ansicolor}
   s.rdoc_options = ["--main", "README", "--title", "Term::ANSIColor"]
   s.require_paths = ["lib"]
