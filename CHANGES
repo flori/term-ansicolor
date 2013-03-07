@@ -1,4 +1,6 @@
-2011-10-19 - 1.0.8 * Cleanup documentation.
+2013-03-07 - 1.1.0 * Cleanup documentation.
+                   * Implement color0 - color255 and on_color0 - on_color255
+                     methods for xterm256 colors.
 2011-10-13 - 1.0.7 * Merged patch by Mike Bethany <mikbe.tk@gmail.com> that
                      adds high intensity colors and backgrounds.
                    * Fix problem caused by Ruby 1.9 implementing String#clear

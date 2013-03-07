@@ -82,11 +82,11 @@ module Term
     end
     self.coloring = true
 
-    ATTRIBUTES.each do |c, v|
-      eval <<-EOT
-        def #{c}(string = nil)
+    def self.create_color_method(color_name, color_value)
+      module_eval <<-EOT
+        def #{color_name}(string = nil)
           result = ''
-          result << "\e[#{v}m" if Term::ANSIColor.coloring?
+          result << "\e[#{color_value}m" if Term::ANSIColor.coloring?
           if block_given?
             result << yield
           elsif string.respond_to?(:to_str)
@@ -100,15 +100,42 @@ module Term
           result
         end
       EOT
+      self
     end
+
+    def method_missing(name, *args, &block)
+      color_name, color_value = Term::ANSIColor::ATTRIBUTES.assoc(name)
+      if color_name
+        ::Term::ANSIColor.create_color_method(name, color_value)
+        return __send__(color_name, *args, &block)
+      end
+      color_name = name.to_s
+      if color_name =~ /\A(?:(on_)?color)(\d+)\z/
+        code  = $1 ? 48 : 38
+        index = $2.to_i
+        if (0..255).include?(index)
+          ::Term::ANSIColor.create_color_method($&, "#{code};5;#{index}")
+          return __send__(color_name, *args, &block)
+        end
+      end
+      super
+    end
+
+    module RespondTo
+      def respond_to?(symbol, include_all = false)
+        attributes.include?(symbol) or super
+      end
+    end
+    include RespondTo
+    extend RespondTo
 
     # Regular expression that is used to scan for ANSI-sequences while
     # uncoloring strings.
-    COLORED_REGEXP = /\e\[(?:(?:[349]|10)[0-7]|[0-9])?m/
+    COLORED_REGEXP = /\e\[(?:(?:[349]|10)[0-7]|[0-9]|[34]8;5;\d{1,3})?m/
 
     # Returns an uncolored version of the string, that is all
     # ANSI-sequences are stripped from the string.
-    def uncolored(string = nil) # :yields:
+    def uncolor(string = nil) # :yields:
       if block_given?
         yield.to_str.gsub(COLORED_REGEXP, '')
       elsif string.respond_to?(:to_str)
@@ -120,11 +147,13 @@ module Term
       end
     end
 
-    module_function
+    alias uncolored uncolor
 
     # Returns an array of all Term::ANSIColor attributes as symbols.
     def attributes
-      ATTRIBUTE_NAMES
+      @attributes ||= ATTRIBUTE_NAMES +
+        (0..255).map { |index| "color#{index}".to_sym } +
+        (0..255).map { |index| "on_color#{index}".to_sym }
     end
     extend self
   end

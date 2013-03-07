@@ -52,35 +52,39 @@ class ANSIColorTest < Test::Unit::TestCase
   end
 
 
-  def test_uncolored
-    assert_equal string, string_red.uncolored
-    assert_equal string, Color.uncolored(string_red)
-    assert_equal string, Color.uncolored(string_like_red)
-    assert_equal string, Color.uncolored { string_red }
-    assert_equal string, Color.uncolored { string_like_red }
-    assert_equal string, Term::ANSIColor.uncolored { string_red }
-    assert_equal string, Term::ANSIColor.uncolored { string_like_red }
-    assert_equal string, uncolored { string }
-    assert_equal string, uncolored { string_like_red }
-    assert_equal "", uncolored(Object.new)
+  def test_uncolor
+    assert_equal string, string_red.uncolor
+    assert_equal string, Color.uncolor(string_red)
+    assert_equal string, Color.uncolor(string_like_red)
+    assert_equal string, Color.uncolor { string_red }
+    assert_equal string, Color.uncolor { string_like_red }
+    assert_equal string, Term::ANSIColor.uncolor { string_red }
+    assert_equal string, Term::ANSIColor.uncolor { string_like_red }
+    assert_equal string, uncolor { string }
+    assert_equal string, uncolor { string_like_red }
+    assert_equal "", uncolor(Object.new)
+    for index in 0..255
+      assert_equal "foo", Color.uncolor(Color.__send__("color#{index}", "foo"))
+      assert_equal "foo", Color.uncolor(Color.__send__("on_color#{index}", "foo"))
+    end
   end
 
   def test_attributes
     foo = 'foo'
-    for (a, _) in Term::ANSIColor.attributes
+    for a in Term::ANSIColor.attributes
       # skip clear for Ruby 1.9 which implements String#clear to empty the string
       if a != :clear || Term::ANSIColor.support?(:clear)
         assert_not_equal foo, foo_colored = foo.__send__(a)
-        assert_equal foo, foo_colored.uncolored
+        assert_equal foo, foo_colored.uncolor
       end
       assert_not_equal foo, foo_colored = Color.__send__(a, foo)
-      assert_equal foo, Color.uncolored(foo_colored)
+      assert_equal foo, Color.uncolor(foo_colored)
       assert_not_equal foo, foo_colored = Color.__send__(a) { foo }
-      assert_equal foo, Color.uncolored { foo_colored }
+      assert_equal foo, Color.uncolor { foo_colored }
       assert_not_equal foo, foo_colored = Term::ANSIColor.__send__(a) { foo }
-      assert_equal foo, Term::ANSIColor.uncolored { foo_colored }
+      assert_equal foo, Term::ANSIColor.uncolor { foo_colored }
       assert_not_equal foo, foo_colored = __send__(a) { foo }
-      assert_equal foo, uncolored { foo_colored }
+      assert_equal foo, uncolor { foo_colored }
     end
   end
 
