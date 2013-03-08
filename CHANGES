@@ -1,3 +1,7 @@
+2013-03-08 - 1.1.1 * Avoid possible conflicts with other people's attributes
+                     methods.
+                   * Cache attributes globally, also fix caching for frozen
+                     strings.
 2013-03-07 - 1.1.0 * Cleanup documentation.
                    * Implement color0 - color255 and on_color0 - on_color255
                      methods for xterm256 colors.

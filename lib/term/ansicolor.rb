@@ -123,7 +123,7 @@ module Term
 
     module RespondTo
       def respond_to?(symbol, include_all = false)
-        attributes.include?(symbol) or super
+        term_ansicolor_attributes.include?(symbol) or super
       end
     end
     include RespondTo
@@ -149,12 +149,23 @@ module Term
 
     alias uncolored uncolor
 
-    # Returns an array of all Term::ANSIColor attributes as symbols.
-    def attributes
-      @attributes ||= ATTRIBUTE_NAMES +
-        (0..255).map { |index| "color#{index}".to_sym } +
-        (0..255).map { |index| "on_color#{index}".to_sym }
+    class << self
+      # Returns an array of all Term::ANSIColor attributes as symbols.
+      def term_ansicolor_attributes
+        @term_ansicolor_attributes ||= Term::ANSIColor::ATTRIBUTE_NAMES +
+          (0..255).map { |index| "color#{index}".to_sym } +
+          (0..255).map { |index| "on_color#{index}".to_sym }
+      end
+
+      alias attributes term_ansicolor_attributes
     end
+
+    def  term_ansicolor_attributes
+      ::Term::ANSIColor.term_ansicolor_attributes
+    end
+
+    alias attributes term_ansicolor_attributes
+
     extend self
   end
 end

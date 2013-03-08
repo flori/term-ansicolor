@@ -91,4 +91,12 @@ class ANSIColorTest < Test::Unit::TestCase
   def test_coloring_string_like
     assert_equal "\e[31mred\e[0m", red(string_like)
   end
+
+  def test_frozen
+    string = 'foo'
+    red = string.red
+    string.extend(Term::ANSIColor).freeze
+    assert string.frozen?
+    assert_equal red, string.red
+  end
 end
