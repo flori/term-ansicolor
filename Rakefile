@@ -10,11 +10,14 @@ GemHadar do
   email       'flori@ping.de'
   homepage    "http://flori.github.com/#{name}"
   summary     'Ruby library that colors strings using ANSI escape sequences'
-  description ''
+  description 'This library uses ANSI escape sequences to control the attributes of terminal output'
+  licenses    << 'GPL-2'
   test_dir    'tests'
   ignore      '.*.sw[pon]', 'pkg', 'Gemfile.lock', '.rvmrc', 'coverage'
   readme      'README.rdoc'
   executables << 'cdiff' << 'decolor'
+
+  development_dependency 'simplecov'
 
   install_library do
     destdir = "#{ENV['DESTDIR']}"

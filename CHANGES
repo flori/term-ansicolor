@@ -1,3 +1,11 @@
+2013-03-25 - 1.1.2 * Change the API: color0 - color255 to color(:color0) -
+                     color(:color255), and on_color0 to on_color(:color0) -
+                     on_color(:color255); the previous way caused some
+                     failures, sorry. On the plus side you can now do
+                     color('#4a6ab4') and get the nearest terminal color to
+                     this html color.
+                   * Add colortab executable to display the 255 colors and
+                     related HTML colors.
 2013-03-08 - 1.1.1 * Avoid possible conflicts with other people's attributes
                      methods.
                    * Cache attributes globally, also fix caching for frozen

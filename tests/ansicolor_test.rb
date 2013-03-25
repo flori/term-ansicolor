@@ -1,7 +1,4 @@
-#!/usr/bin/env ruby
-
-require 'test/unit'
-require 'term/ansicolor'
+require File.expand_path('test_helper', File.dirname(__FILE__))
 
 class String
   include Term::ANSIColor
@@ -51,6 +48,25 @@ class ANSIColorTest < Test::Unit::TestCase
     assert_equal string_red_on_green, on_green { red { string } }
   end
 
+  def test_color
+    assert_equal "\e[38;5;128mfoo\e[0m", Color.color(:color128, "foo")
+    assert_equal "\e[38;5;128mfoo\e[0m", "foo".color(:color128)
+    assert_equal "\e[38;5;128mfoo\e[0m", color(:color128, "foo")
+    assert_equal "\e[38;5;128mfoo\e[0m", Color.color(:color128) { "foo" }
+    assert_equal "\e[38;5;128mfoo\e[0m", "foo".color(:color128) { "foo" }
+    assert_equal "\e[38;5;128mfoo\e[0m", color(:color128) { "foo" }
+    assert_equal "\e[38;5;128mfoo\e[0m", color(:color128) + "foo" + color(:reset)
+  end
+
+  def test_on_color
+    assert_equal "\e[48;5;128mfoo\e[0m", Color.on_color(:color128, "foo")
+    assert_equal "\e[48;5;128mfoo\e[0m", "foo".on_color(:color128)
+    assert_equal "\e[48;5;128mfoo\e[0m", on_color(:color128, "foo")
+    assert_equal "\e[48;5;128mfoo\e[0m", Color.on_color(:color128) { "foo" }
+    assert_equal "\e[48;5;128mfoo\e[0m", "foo".on_color(:color128) { "foo" }
+    assert_equal "\e[48;5;128mfoo\e[0m", on_color(:color128) { "foo" }
+    assert_equal "\e[48;5;128mfoo\e[0m", on_color(:color128) + "foo" + color(:reset)
+  end
 
   def test_uncolor
     assert_equal string, string_red.uncolor
@@ -64,8 +80,8 @@ class ANSIColorTest < Test::Unit::TestCase
     assert_equal string, uncolor { string_like_red }
     assert_equal "", uncolor(Object.new)
     for index in 0..255
-      assert_equal "foo", Color.uncolor(Color.__send__("color#{index}", "foo"))
-      assert_equal "foo", Color.uncolor(Color.__send__("on_color#{index}", "foo"))
+      assert_equal "foo", Color.uncolor(Color.color("color#{index}", "foo"))
+      assert_equal "foo", Color.uncolor(Color.on_color("color#{index}", "foo"))
     end
   end
 
@@ -98,5 +114,15 @@ class ANSIColorTest < Test::Unit::TestCase
     string.extend(Term::ANSIColor).freeze
     assert string.frozen?
     assert_equal red, string.red
+  end
+
+  def test_nearest_rgb_color
+    assert_equal Term::ANSIColor::Attribute.get(:color0).rgb, Term::ANSIColor::Attribute.nearest_rgb_color('#000').rgb
+    assert_equal Term::ANSIColor::Attribute.get(:color15).rgb, Term::ANSIColor::Attribute.nearest_rgb_color('#ffffff').rgb
+  end
+
+  def test_nearest_rgb_color
+    assert_equal Term::ANSIColor::Attribute.get(:on_color0).rgb, Term::ANSIColor::Attribute.nearest_rgb_on_color('#000').rgb
+    assert_equal Term::ANSIColor::Attribute.get(:on_color15).rgb, Term::ANSIColor::Attribute.nearest_rgb_on_color('#ffffff').rgb
   end
 end
