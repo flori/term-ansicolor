@@ -1,6 +1,6 @@
-2013-03-26 - 1.1.3 * Fix a bug where respond_to could overflow the stack.
-                   * Easier access to color attributes via color(123) or
+2013-03-26 - 1.1.4 * Easier access to color attributes via color(123) or
                      approximate html colors like color('#336caf').
+2013-03-26 - 1.1.3 * Fix a bug where respond_to could overflow the stack.
 2013-03-25 - 1.1.2 * Change the API: color0 - color255 to color(:color0) -
                      color(:color255), and on_color0 to on_color(:color0) -
                      on_color(:color255); the previous way caused some
