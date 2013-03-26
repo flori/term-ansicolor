@@ -10,6 +10,16 @@ module Term
         result
       end
 
+      def self.[](name)
+        case
+        when self === name                              then name
+        when name.to_s =~ /\A(on_)?(\d+)\z/             then get "#$1color#$2"
+        when name.to_s =~ /\A#([0-9a-f]{3}){1,2}\z/i    then nearest_rgb_color name
+        when name.to_s =~ /\Aon_#([0-9a-f]{3}){1,2}\z/i then nearest_rgb_on_color name
+        else                                            get name
+        end
+      end
+
       def self.get(name)
         @__store__[name.to_sym]
       end
@@ -76,6 +86,8 @@ module Term
           other_rgb = other.to_rgb_triple
         then
           our_rgb.distance_to other_rgb
+        else
+          1 / 0.0
         end
       end
     end

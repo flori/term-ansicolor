@@ -116,14 +116,4 @@ class ANSIColorTest < Test::Unit::TestCase
     assert string.frozen?
     assert_equal red, string.red
   end
-
-  def test_nearest_rgb_color
-    assert_equal Term::ANSIColor::Attribute.get(:color0).rgb, Term::ANSIColor::Attribute.nearest_rgb_color('#000').rgb
-    assert_equal Term::ANSIColor::Attribute.get(:color15).rgb, Term::ANSIColor::Attribute.nearest_rgb_color('#ffffff').rgb
-  end
-
-  def test_nearest_rgb_color
-    assert_equal Term::ANSIColor::Attribute.get(:on_color0).rgb, Term::ANSIColor::Attribute.nearest_rgb_on_color('#000').rgb
-    assert_equal Term::ANSIColor::Attribute.get(:on_color15).rgb, Term::ANSIColor::Attribute.nearest_rgb_on_color('#ffffff').rgb
-  end
 end

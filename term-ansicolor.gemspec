@@ -11,14 +11,14 @@ Gem::Specification.new do |s|
   s.email = "flori@ping.de"
   s.executables = ["cdiff", "decolor"]
   s.extra_rdoc_files = ["README.rdoc", "lib/term/ansicolor.rb", "lib/term/ansicolor/attribute.rb", "lib/term/ansicolor/rgb_triple.rb", "lib/term/ansicolor/version.rb"]
-  s.files = [".gitignore", ".travis.yml", "CHANGES", "COPYING", "Gemfile", "README.rdoc", "Rakefile", "VERSION", "bin/cdiff", "bin/colortab", "bin/decolor", "examples/example.rb", "lib/term/ansicolor.rb", "lib/term/ansicolor/.keep", "lib/term/ansicolor/attribute.rb", "lib/term/ansicolor/rgb_triple.rb", "lib/term/ansicolor/version.rb", "term-ansicolor.gemspec", "tests/ansicolor_test.rb", "tests/rgb_triple_test.rb", "tests/test_helper.rb"]
+  s.files = [".gitignore", ".travis.yml", "CHANGES", "COPYING", "Gemfile", "README.rdoc", "Rakefile", "VERSION", "bin/cdiff", "bin/colortab", "bin/decolor", "examples/example.rb", "lib/term/ansicolor.rb", "lib/term/ansicolor/.keep", "lib/term/ansicolor/attribute.rb", "lib/term/ansicolor/rgb_triple.rb", "lib/term/ansicolor/version.rb", "term-ansicolor.gemspec", "tests/ansicolor_test.rb", "tests/attribute_test.rb", "tests/rgb_triple_test.rb", "tests/test_helper.rb"]
   s.homepage = "http://flori.github.com/term-ansicolor"
   s.licenses = ["GPL-2"]
   s.rdoc_options = ["--title", "Term-ansicolor - Ruby library that colors strings using ANSI escape sequences", "--main", "README.rdoc"]
   s.require_paths = ["lib"]
   s.rubygems_version = "2.0.3"
   s.summary = "Ruby library that colors strings using ANSI escape sequences"
-  s.test_files = ["tests/ansicolor_test.rb", "tests/rgb_triple_test.rb", "tests/test_helper.rb"]
+  s.test_files = ["tests/ansicolor_test.rb", "tests/attribute_test.rb", "tests/rgb_triple_test.rb", "tests/test_helper.rb"]
 
   if s.respond_to? :specification_version then
     s.specification_version = 4

@@ -36,7 +36,7 @@ module Term
         case
         when thing.respond_to?(:to_rgb_triple) then thing
         when thing.respond_to?(:to_ary)        then RGBTriple.from_array(thing.to_ary)
-        when thing.respond_to?(:to_str)        then RGBTriple.from_html(thing.to_str)
+        when thing.respond_to?(:to_str)        then RGBTriple.from_html(thing.to_str.sub(/\Aon_/, '')) # XXX somewhat hacky
         when thing.respond_to?(:to_hash)       then RGBTriple.from_hash(thing.to_hash)
         else raise ArgumentError, "cannot convert #{thing.inspect} into #{self}"
         end

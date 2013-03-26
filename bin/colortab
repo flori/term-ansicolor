@@ -6,10 +6,8 @@ class String
   include Term::ANSIColor
 end
 
-$colors = Term::ANSIColor::Attribute.rgb_colors.to_a
-
 def print_color(c)
-  color = $colors[c]
+  color = Term::ANSIColor::Attribute[c]
   text = [
     Term::ANSIColor::Attribute.nearest_rgb_color('#000'),
     Term::ANSIColor::Attribute.nearest_rgb_color('#fff'),
