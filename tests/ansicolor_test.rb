@@ -102,6 +102,7 @@ class ANSIColorTest < Test::Unit::TestCase
       assert_not_equal foo, foo_colored = __send__(a) { foo }
       assert_equal foo, uncolor { foo_colored }
     end
+    assert_equal Term::ANSIColor.attributes, 'foo'.attributes
   end
 
   def test_coloring_string_like

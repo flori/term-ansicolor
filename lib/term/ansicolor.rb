@@ -161,14 +161,6 @@ module Term
        create_color_method(attribute.name, attribute.code)
     end
 
-    module RespondTo
-      def respond_to?(symbol, include_all = false)
-        term_ansicolor_attributes.include?(symbol) or super
-      end
-    end
-    include RespondTo
-    extend RespondTo
-
     # Regular expression that is used to scan for ANSI-Attributes while
     # uncoloring strings.
     COLORED_REGEXP = /\e\[(?:(?:[349]|10)[0-7]|[0-9]|[34]8;5;\d{1,3})?m/
@@ -217,7 +209,7 @@ module Term
     class << self
       # Returns an array of all Term::ANSIColor attributes as symbols.
       def term_ansicolor_attributes
-        @term_ansicolor_attributes ||= Term::ANSIColor::ATTRIBUTE_NAMES
+        ::Term::ANSIColor::ATTRIBUTE_NAMES
       end
 
       alias attributes term_ansicolor_attributes
