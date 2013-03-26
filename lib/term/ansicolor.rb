@@ -185,12 +185,7 @@ module Term
     # color +name+. If string isn't a string only the escape sequence to switch
     # on the color +name+ is returned.
     def color(name, string = nil, &block)
-      attribute = Attribute.get(name)
-      attribute ||=
-        name.to_s =~ /\Aon_/ ?
-        Attribute.nearest_rgb_on_color(name) :
-        Attribute.nearest_rgb_color(name)
-      attribute or raise ArgumentError, "unknown attribute #{name.inspect}"
+      attribute = Attribute[name] or raise ArgumentError, "unknown attribute #{name.inspect}"
       result = ''
       result << "\e[#{attribute.code}m" if Term::ANSIColor.coloring?
       if block_given?

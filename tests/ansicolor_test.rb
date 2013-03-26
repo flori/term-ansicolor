@@ -56,6 +56,13 @@ class ANSIColorTest < Test::Unit::TestCase
     assert_equal "\e[38;5;128mfoo\e[0m", "foo".color(:color128) { "foo" }
     assert_equal "\e[38;5;128mfoo\e[0m", color(:color128) { "foo" }
     assert_equal "\e[38;5;128mfoo\e[0m", color(:color128) + "foo" + color(:reset)
+    assert_equal "\e[38;5;128mfoo\e[0m", Color.color(128, "foo")
+    assert_equal "\e[38;5;128mfoo\e[0m", "foo".color(128)
+    assert_equal "\e[38;5;128mfoo\e[0m", color(128, "foo")
+    assert_equal "\e[38;5;128mfoo\e[0m", Color.color(128) { "foo" }
+    assert_equal "\e[38;5;128mfoo\e[0m", "foo".color(128) { "foo" }
+    assert_equal "\e[38;5;128mfoo\e[0m", color(128) { "foo" }
+    assert_equal "\e[38;5;128mfoo\e[0m", color(128) + "foo" + color(:reset)
   end
 
   def test_on_color
@@ -66,6 +73,13 @@ class ANSIColorTest < Test::Unit::TestCase
     assert_equal "\e[48;5;128mfoo\e[0m", "foo".on_color(:color128) { "foo" }
     assert_equal "\e[48;5;128mfoo\e[0m", on_color(:color128) { "foo" }
     assert_equal "\e[48;5;128mfoo\e[0m", on_color(:color128) + "foo" + color(:reset)
+    assert_equal "\e[48;5;128mfoo\e[0m", Color.on_color(128, "foo")
+    assert_equal "\e[48;5;128mfoo\e[0m", "foo".on_color(128)
+    assert_equal "\e[48;5;128mfoo\e[0m", on_color(128, "foo")
+    assert_equal "\e[48;5;128mfoo\e[0m", Color.on_color(128) { "foo" }
+    assert_equal "\e[48;5;128mfoo\e[0m", "foo".on_color(128) { "foo" }
+    assert_equal "\e[48;5;128mfoo\e[0m", on_color(128) { "foo" }
+    assert_equal "\e[48;5;128mfoo\e[0m", on_color(128) + "foo" + color(:reset)
   end
 
   def test_uncolor
