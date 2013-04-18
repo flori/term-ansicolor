@@ -2,14 +2,14 @@
 
 Gem::Specification.new do |s|
   s.name = "term-ansicolor"
-  s.version = "1.1.4"
+  s.version = "1.1.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Florian Frank"]
-  s.date = "2013-03-26"
+  s.date = "2013-04-18"
   s.description = "This library uses ANSI escape sequences to control the attributes of terminal output"
   s.email = "flori@ping.de"
-  s.executables = ["cdiff", "decolor"]
+  s.executables = ["cdiff", "decolor", "colortab"]
   s.extra_rdoc_files = ["README.rdoc", "lib/term/ansicolor.rb", "lib/term/ansicolor/attribute.rb", "lib/term/ansicolor/rgb_triple.rb", "lib/term/ansicolor/version.rb"]
   s.files = [".gitignore", ".travis.yml", "CHANGES", "COPYING", "Gemfile", "README.rdoc", "Rakefile", "VERSION", "bin/cdiff", "bin/colortab", "bin/decolor", "examples/example.rb", "lib/term/ansicolor.rb", "lib/term/ansicolor/.keep", "lib/term/ansicolor/attribute.rb", "lib/term/ansicolor/rgb_triple.rb", "lib/term/ansicolor/version.rb", "term-ansicolor.gemspec", "tests/ansicolor_test.rb", "tests/attribute_test.rb", "tests/rgb_triple_test.rb", "tests/test_helper.rb"]
   s.homepage = "http://flori.github.com/term-ansicolor"

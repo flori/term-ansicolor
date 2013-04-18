@@ -15,7 +15,7 @@ GemHadar do
   test_dir    'tests'
   ignore      '.*.sw[pon]', 'pkg', 'Gemfile.lock', '.rvmrc', 'coverage'
   readme      'README.rdoc'
-  executables << 'cdiff' << 'decolor'
+  executables << 'cdiff' << 'decolor' << 'colortab'
 
   development_dependency 'simplecov'
 
