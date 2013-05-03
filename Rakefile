@@ -13,11 +13,14 @@ GemHadar do
   description 'This library uses ANSI escape sequences to control the attributes of terminal output'
   licenses    << 'GPL-2'
   test_dir    'tests'
-  ignore      '.*.sw[pon]', 'pkg', 'Gemfile.lock', '.rvmrc', 'coverage'
+  ignore      '.*.sw[pon]', 'pkg', 'Gemfile.lock', '.rvmrc', 'coverage', 'tags'
   readme      'README.rdoc'
-  executables << 'cdiff' << 'decolor' << 'colortab'
+  executables << 'cdiff' << 'decolor' << 'colortab' << 'term_mandel' << 'term_display'
 
+  dependency             'tins', '~>0.8'
   development_dependency 'simplecov'
+
+  post_install_message File.read(File.join(File.dirname(__FILE__), 'examples/smiley.txt'))
 
   install_library do
     destdir = "#{ENV['DESTDIR']}"

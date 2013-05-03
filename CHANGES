@@ -1,3 +1,6 @@
+2013-05-16 - 1.2.0 * Add term_mandel and term_display executables.
+                   * Implement configurable color metrics.
+                   * Add gradient functionality for color attributes.
 2013-04-18 - 1.1.5 * Add colortab executable to rubygem binary config
 2013-03-26 - 1.1.4 * Easier access to color attributes via color(123) or
                      approximate html colors like color('#336caf').

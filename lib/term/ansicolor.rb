@@ -6,6 +6,7 @@ module Term
     require 'term/ansicolor/version'
     require 'term/ansicolor/attribute'
     require 'term/ansicolor/rgb_triple'
+    require 'term/ansicolor/ppm_reader'
 
     Attribute.set :clear             ,   0 # String#clear is already used to empty string in Ruby 1.9
     Attribute.set :reset             ,   0 # synonym for :clear
@@ -202,7 +203,8 @@ module Term
     end
 
     def on_color(name, string = nil, &block)
-      color("on_#{name}", string, &block)
+      attribute = Attribute[name] or raise ArgumentError, "unknown attribute #{name.inspect}"
+      color("on_#{attribute.name}", string, &block)
     end
 
     class << self

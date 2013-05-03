@@ -1,6 +1,10 @@
+require 'term/ansicolor/rgb_color_metrics'
+
 module Term
   module ANSIColor
     class RGBTriple
+      include Term::ANSIColor::RGBColorMetricsHelpers::WeightedEuclideanDistance
+
       def self.convert_value(color)
         color.nil? and raise ArgumentError, "missing color value"
         color = Integer(color)
@@ -58,6 +62,10 @@ module Term
         @values[2]
       end
 
+      def gray?
+        red != 0 && red != 0xff && red == green && green == blue && blue == red
+      end
+
       def html
         s = '#'
         @values.each { |c| s << '%02x' % c }
@@ -79,12 +87,34 @@ module Term
         @values == other.values
       end
 
-      def distance_to(other)
-        Math.sqrt(
-          ((red - other.red) * 0.299) ** 2 +
-          ((green - other.green) * 0.587) ** 2 +
-          ((blue - other.blue) * 0.114) ** 2
-        )
+      def distance_to(other, options = {})
+        options[:metric] ||= RGBColorMetrics::CIELab
+        options[:metric].distance(self, other)
+      end
+
+      def initialize_copy(other)
+        r = super
+        other.instance_variable_set :@values, @values.dup
+        r
+      end
+
+      def gradient_to(other, options = {})
+        options[:steps] ||= 16
+        steps = options[:steps].to_i
+        steps < 2 and raise ArgumentError, 'at least 2 steps are required'
+        changes = other.values.zip(@values).map { |x, y| x - y }
+        current = self
+        gradient = [ current.dup ]
+        s = steps - 1
+        while s > 1
+          current = current.dup
+          gradient << current
+          3.times do |i|
+            current.values[i] += changes[i] / (steps - 1)
+          end
+          s -= 1
+        end
+        gradient << other
       end
     end
   end
