@@ -24,7 +24,7 @@ module Term
         end
 
         def normalize_rgb_triple(rgb_triple)
-          r, g, b = [
+          [
             rgb_triple.red,
             rgb_triple.green,
             rgb_triple.blue
