@@ -1,3 +1,4 @@
+2013-05-23 - 1.2.1 * Prevent warnings when running in -w mode.
 2013-05-16 - 1.2.0 * Add term_mandel and term_display executables.
                    * Implement configurable color metrics.
                    * Add gradient functionality for color attributes.

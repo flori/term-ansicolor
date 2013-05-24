@@ -78,6 +78,8 @@ module Term
           @rgb = RGBTriple.from_html(html)
         elsif !options.empty?
           @rgb = RGBTriple.from_hash(options)
+        else
+          @rgb = nil # prevent instance variable not initialized warnings
         end
       end
 
