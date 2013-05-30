@@ -20,8 +20,6 @@ GemHadar do
   dependency             'tins', '~>0.8'
   development_dependency 'simplecov'
 
-  post_install_message File.read(File.join(File.dirname(__FILE__), 'examples/smiley.txt'))
-
   install_library do
     destdir = "#{ENV['DESTDIR']}"
     libdir = CONFIG["sitelibdir"]

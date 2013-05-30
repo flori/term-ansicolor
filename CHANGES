@@ -1,4 +1,8 @@
-2013-05-23 - 1.2.1 * Prevent warnings when running in -w mode.
+2013-05-30 - 1.2.2 * No more fun and smileys, now you have to call term_display
+                     yourself.
+                   * term_display can now display image URLs directly.
+2013-05-25 - 1.2.1 * Merge patch from Gavin Kistner <gavin@phrogz.net> to
+                     prevent warnings when running in -w mode.
 2013-05-16 - 1.2.0 * Add term_mandel and term_display executables.
                    * Implement configurable color metrics.
                    * Add gradient functionality for color attributes.

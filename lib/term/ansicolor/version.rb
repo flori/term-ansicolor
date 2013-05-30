@@ -1,6 +1,6 @@
 module Term::ANSIColor
   # Term::ANSIColor version
-  VERSION         = '1.2.1'
+  VERSION         = '1.2.2'
   VERSION_ARRAY   = VERSION.split('.').map(&:to_i) # :nodoc:
   VERSION_MAJOR   = VERSION_ARRAY[0] # :nodoc:
   VERSION_MINOR   = VERSION_ARRAY[1] # :nodoc:
