@@ -2,6 +2,7 @@
 
 require 'tempfile'
 require 'term/ansicolor'
+require 'open-uri'
 require 'tins/xt'
 include Tins::GO
 
@@ -38,7 +39,7 @@ def provide_ppm_file(filename, opts)
     cmd *= '|'
     STDERR.puts "Executing #{cmd.inspect}"
     IO.popen(cmd, 'r+') do |converter|
-      File.open(filename, 'rb') do |input|
+      open(filename, 'rb') do |input|
         until input.eof?
           converter.write input.read(8192)
         end
