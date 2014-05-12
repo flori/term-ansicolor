@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+#
 require 'term/ansicolor'
 
 # Use this trick to work around namespace cluttering that
