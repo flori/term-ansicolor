@@ -4,8 +4,8 @@ require 'gem_hadar'
 
 GemHadar do
   name        'term-ansicolor'
-  path_name   'term/ansicolor'
-  path_module 'Term::ANSIColor'
+  path_name   'termin/ansicolor'
+  path_module 'Termin::ANSIColor'
   author      'Florian Frank'
   email       'flori@ping.de'
   homepage    "http://flori.github.com/#{name}"

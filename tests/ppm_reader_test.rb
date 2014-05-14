@@ -2,7 +2,7 @@ require 'test_helper'
 require 'digest/md5'
 
 class PPMReaderTest < Test::Unit::TestCase
-  include Term::ANSIColor
+  include Termin::ANSIColor
 
   def test_loading_ppm6
     File.open(example_path('lambda-red.ppm')) do |ppm6|

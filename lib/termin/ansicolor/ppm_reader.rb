@@ -1,7 +1,7 @@
-module Term
+module Termin
   module ANSIColor
     class PPMReader
-      include Term::ANSIColor
+      include Termin::ANSIColor
 
       def initialize(io, options = {})
         @io      = io

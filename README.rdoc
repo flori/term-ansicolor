@@ -1,4 +1,4 @@
-= Term::ANSIColor - ANSI escape sequences in Ruby
+= Termin::ANSIColor - ANSI escape sequences in Ruby
 
 == Description
 
@@ -31,7 +31,7 @@ The homepage of this library is located at
 
 == Examples
 
-The following executables are provided with Term::ANSIColor:
+The following executables are provided with Termin::ANSIColor:
 
 * cdiff: colors a diff patch
 * decolor: decolors any text file that was colored with ANSI escape sequences

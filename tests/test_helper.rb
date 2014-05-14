@@ -5,4 +5,4 @@ if ENV['START_SIMPLECOV'].to_i == 1
   end
 end
 require 'test/unit'
-require 'term/ansicolor'
+require 'termin/ansicolor'

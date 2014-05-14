@@ -1,12 +1,12 @@
-module Term
+module Termin
 
   # The ANSIColor module can be used for namespacing and mixed into your own
   # classes.
   module ANSIColor
-    require 'term/ansicolor/version'
-    require 'term/ansicolor/attribute'
-    require 'term/ansicolor/rgb_triple'
-    require 'term/ansicolor/ppm_reader'
+    require 'termin/ansicolor/version'
+    require 'termin/ansicolor/attribute'
+    require 'termin/ansicolor/rgb_triple'
+    require 'termin/ansicolor/ppm_reader'
 
     Attribute.set :clear             ,   0 # String#clear is already used to empty string in Ruby 1.9
     Attribute.set :reset             ,   0 # synonym for :clear
@@ -142,7 +142,7 @@ module Term
     ATTRIBUTE_NAMES = Attribute.named_attributes.map(&:name)
     # :startdoc:
 
-    # Returns true if Term::ANSIColor supports the +feature+.
+    # Returns true if Termin::ANSIColor supports the +feature+.
     #
     # The feature :clear, that is mixing the clear color attribute into String,
     # is only supported on ruby implementations, that do *not* already
@@ -162,7 +162,7 @@ module Term
 
     # Turns the coloring on or off globally, so you can easily do
     # this for example:
-    #  Term::ANSIColor::coloring = STDOUT.isatty
+    #  Termin::ANSIColor::coloring = STDOUT.isatty
     def self.coloring=(val)
       @coloring = val
     end
@@ -207,7 +207,7 @@ module Term
     def color(name, string = nil, &block)
       attribute = Attribute[name] or raise ArgumentError, "unknown attribute #{name.inspect}"
       result = ''
-      result << "\e[#{attribute.code}m" if Term::ANSIColor.coloring?
+      result << "\e[#{attribute.code}m" if Termin::ANSIColor.coloring?
       if block_given?
         result << yield
       elsif string.respond_to?(:to_str)
@@ -217,7 +217,7 @@ module Term
       else
         return result #only switch on
       end
-      result << "\e[0m" if Term::ANSIColor.coloring?
+      result << "\e[0m" if Termin::ANSIColor.coloring?
       result
     end
 
@@ -227,17 +227,17 @@ module Term
     end
 
     class << self
-      # Returns an array of all Term::ANSIColor attributes as symbols.
+      # Returns an array of all Termin::ANSIColor attributes as symbols.
       def term_ansicolor_attributes
-        ::Term::ANSIColor::ATTRIBUTE_NAMES
+        ::Termin::ANSIColor::ATTRIBUTE_NAMES
       end
 
       alias attributes term_ansicolor_attributes
     end
 
-    # Returns an array of all Term::ANSIColor attributes as symbols.
+    # Returns an array of all Termin::ANSIColor attributes as symbols.
     def  term_ansicolor_attributes
-      ::Term::ANSIColor.term_ansicolor_attributes
+      ::Termin::ANSIColor.term_ansicolor_attributes
     end
 
     alias attributes term_ansicolor_attributes

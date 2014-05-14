@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'tempfile'
-require 'term/ansicolor'
+require 'termin/ansicolor'
 require 'open-uri'
 require 'tins/xt'
 include Tins::GO
@@ -59,7 +59,7 @@ def usage(rc = 0)
 
     Options are
 
-      -m METRIC       for distance (METRIC = #{Term::ANSIColor::RGBColorMetrics.metrics * '|'})
+      -m METRIC       for distance (METRIC = #{Termin::ANSIColor::RGBColorMetrics.metrics * '|'})
       -g yes|no       use/don't use gray values, defaults to yes
       -s xyfit|xyfill scaling strategy, defaults to xyfit
       -a ASPECT       x:y aspect, defaults to 2.2
@@ -74,15 +74,15 @@ end
 opts = go 'hm:g:s:a:C:R:'
 opts['h'] and usage
 filename = ARGV.shift or usage 1
-metric   = Term::ANSIColor::RGBColorMetrics.metric(opts['m'] || 'CIELab')
+metric   = Termin::ANSIColor::RGBColorMetrics.metric(opts['m'] || 'CIELab')
 gray     = (opts['g'] || 'yes') == 'yes'
 opts['s'] ||= 'xyfit'
 opts['a'] ||= '2.2'
-opts['C'] ||= Tins::Terminal.cols
-opts['R'] ||= [ Tins::Terminal.rows - 1, 0 ].max
+opts['C'] ||= Tins::Termininal.cols
+opts['R'] ||= [ Tins::Termininal.rows - 1, 0 ].max
 
 file = provide_ppm_file(filename, opts)
-ppm = Term::ANSIColor::PPMReader.new(
+ppm = Termin::ANSIColor::PPMReader.new(
   file,
   :metric => metric,
   :gray   => gray
