@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class RGBColorMetrics < Test::Unit::TestCase
-  include Term::ANSIColor
+  include Termin::ANSIColor
 
   def setup
     @black = RGBTriple.new(0, 0, 0)

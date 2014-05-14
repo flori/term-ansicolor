@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class RgbTripleTest < Test::Unit::TestCase
-  include Term::ANSIColor
+  include Termin::ANSIColor
 
   def test_rgb_cast
     rgb = RGBTriple.new(128, 0, 255)

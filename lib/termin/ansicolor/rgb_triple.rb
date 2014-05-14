@@ -1,9 +1,9 @@
-require 'term/ansicolor/rgb_color_metrics'
+require 'termin/ansicolor/rgb_color_metrics'
 
-module Term
+module Termin
   module ANSIColor
     class RGBTriple
-      include Term::ANSIColor::RGBColorMetricsHelpers::WeightedEuclideanDistance
+      include Termin::ANSIColor::RGBColorMetricsHelpers::WeightedEuclideanDistance
 
       def self.convert_value(color)
         color.nil? and raise ArgumentError, "missing color value"

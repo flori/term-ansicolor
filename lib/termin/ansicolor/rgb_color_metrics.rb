@@ -1,4 +1,4 @@
-module Term
+module Termin
   module ANSIColor
     module RGBColorMetricsHelpers
       module WeightedEuclideanDistance

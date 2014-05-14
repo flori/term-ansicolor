@@ -1,11 +1,11 @@
 require 'test_helper'
 
 class String
-  include Term::ANSIColor
+  include Termin::ANSIColor
 end
 
 class Color
-  extend Term::ANSIColor
+  extend Termin::ANSIColor
 end
 
 class StringLike
@@ -19,7 +19,7 @@ class StringLike
 end
 
 class ANSIColorTest < Test::Unit::TestCase
-  include Term::ANSIColor
+  include Termin::ANSIColor
 
   def setup
     @string = "red"
@@ -35,7 +35,7 @@ class ANSIColorTest < Test::Unit::TestCase
     assert_equal string_red, string.red
     assert_equal string_red, Color.red(string)
     assert_equal string_red, Color.red { string }
-    assert_equal string_red, Term::ANSIColor.red { string }
+    assert_equal string_red, Termin::ANSIColor.red { string }
     assert_equal string_red, red { string }
   end
 
@@ -44,7 +44,7 @@ class ANSIColorTest < Test::Unit::TestCase
     assert_equal string_red_on_green, Color.on_green(Color.red(string))
     assert_equal string_red_on_green, Color.on_green { Color.red { string } }
     assert_equal string_red_on_green,
-      Term::ANSIColor.on_green { Term::ANSIColor.red { string } }
+      Termin::ANSIColor.on_green { Termin::ANSIColor.red { string } }
     assert_equal string_red_on_green, on_green { red { string } }
   end
 
@@ -88,8 +88,8 @@ class ANSIColorTest < Test::Unit::TestCase
     assert_equal string, Color.uncolor(string_like_red)
     assert_equal string, Color.uncolor { string_red }
     assert_equal string, Color.uncolor { string_like_red }
-    assert_equal string, Term::ANSIColor.uncolor { string_red }
-    assert_equal string, Term::ANSIColor.uncolor { string_like_red }
+    assert_equal string, Termin::ANSIColor.uncolor { string_red }
+    assert_equal string, Termin::ANSIColor.uncolor { string_like_red }
     assert_equal string, uncolor { string }
     assert_equal string, uncolor { string_like_red }
     assert_equal "", uncolor(Object.new)
@@ -101,9 +101,9 @@ class ANSIColorTest < Test::Unit::TestCase
 
   def test_attributes
     foo = 'foo'
-    for a in Term::ANSIColor.attributes
+    for a in Termin::ANSIColor.attributes
       # skip clear for Ruby 1.9 which implements String#clear to empty the string
-      if a != :clear || Term::ANSIColor.support?(:clear)
+      if a != :clear || Termin::ANSIColor.support?(:clear)
         assert_not_equal foo, foo_colored = foo.__send__(a)
         assert_equal foo, foo_colored.uncolor
       end
@@ -111,12 +111,12 @@ class ANSIColorTest < Test::Unit::TestCase
       assert_equal foo, Color.uncolor(foo_colored)
       assert_not_equal foo, foo_colored = Color.__send__(a) { foo }
       assert_equal foo, Color.uncolor { foo_colored }
-      assert_not_equal foo, foo_colored = Term::ANSIColor.__send__(a) { foo }
-      assert_equal foo, Term::ANSIColor.uncolor { foo_colored }
+      assert_not_equal foo, foo_colored = Termin::ANSIColor.__send__(a) { foo }
+      assert_equal foo, Termin::ANSIColor.uncolor { foo_colored }
       assert_not_equal foo, foo_colored = __send__(a) { foo }
       assert_equal foo, uncolor { foo_colored }
     end
-    assert_equal Term::ANSIColor.attributes, 'foo'.attributes
+    assert_equal Termin::ANSIColor.attributes, 'foo'.attributes
   end
 
   def test_coloring_string_like
@@ -126,7 +126,7 @@ class ANSIColorTest < Test::Unit::TestCase
   def test_frozen
     string = 'foo'
     red = string.red
-    string.extend(Term::ANSIColor).freeze
+    string.extend(Termin::ANSIColor).freeze
     assert string.frozen?
     assert_equal red, string.red
   end

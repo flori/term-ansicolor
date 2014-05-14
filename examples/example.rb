@@ -1,12 +1,12 @@
 #!/usr/bin/env ruby
 #
-require 'term/ansicolor'
+require 'termin/ansicolor'
 
 # Use this trick to work around namespace cluttering that
-# happens if you just include Term::ANSIColor:
+# happens if you just include Termin::ANSIColor:
 
 class Color
-  extend Term::ANSIColor
+  extend Termin::ANSIColor
 end
 
 print Color.red, Color.bold, "No Namespace cluttering:", Color.clear, "\n"
@@ -14,17 +14,17 @@ print Color.green + "green" + Color.clear, "\n"
 print Color.on_red(Color.green("green")), "\n"
 print Color.yellow { Color.on_black { "yellow on_black" } }, "\n\n"
 
-# Or shortcut Term::ANSIColor by assignment:
-c = Term::ANSIColor
+# Or shortcut Termin::ANSIColor by assignment:
+c = Termin::ANSIColor
 
 print c.red, c.bold, "No Namespace cluttering (alternative):", c.clear, "\n"
 print c.green + "green" + c.clear, "\n"
 print c.on_red(c.green("green")), "\n"
 print c.yellow { c.on_black { "yellow on_black" } }, "\n\n"
 
-# Anyway, I don't define any of Term::ANSIColor's methods in this example
+# Anyway, I don't define any of Termin::ANSIColor's methods in this example
 # and I want to keep it short:
-include Term::ANSIColor
+include Termin::ANSIColor
 
 print red, bold, "Usage as constants:", reset, "\n"
 print clear, "clear", reset, reset, "reset", reset,
@@ -63,7 +63,7 @@ print clear { "clear" }, reset { "reset" }, bold { "bold" },
 
 # Usage as Mixin into String or its Subclasses
 class String
-  include Term::ANSIColor
+  include Termin::ANSIColor
 end
 
 print "Usage as String Mixins:".red.bold, "\n"
@@ -76,7 +76,7 @@ print "clear".clear, "reset".reset, "bold".bold, "dark".dark,
   "on_yellow".on_yellow, "on_blue".on_blue, "on_magenta".on_magenta,
   "on_cyan".on_cyan, "on_white".on_white, "|\n\n"
 
-symbols = Term::ANSIColor::attributes
+symbols = Termin::ANSIColor::attributes
 print red { bold { "All supported attributes = " } },
   symbols.map { |s| __send__(s, s.inspect) } * ', ', "\n\n"
 
