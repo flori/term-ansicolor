@@ -1,4 +1,4 @@
-module Term
+module Termin
   module ANSIColor
     class Attribute
       @__store__ = {}
@@ -94,7 +94,7 @@ module Term
       end
 
       def apply(string = nil, &block)
-        ::Term::ANSIColor.color(self, string, &block)
+        ::Termin::ANSIColor.color(self, string, &block)
       end
 
       def background?

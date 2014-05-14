@@ -3,9 +3,9 @@
 ## Little unix filter that uncolorizes any input stream.
 #
 
-require 'term/ansicolor'
+require 'termin/ansicolor'
 
-include Term::ANSIColor
+include Termin::ANSIColor
 
 ARGF.each do |line|
   puts line.uncolored
