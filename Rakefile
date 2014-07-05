@@ -15,10 +15,11 @@ GemHadar do
   test_dir    'tests'
   ignore      '.*.sw[pon]', 'pkg', 'Gemfile.lock', '.rvmrc', 'coverage', 'tags', '.bundle'
   readme      'README.rdoc'
-  executables << 'cdiff' << 'decolor' << 'colortab' << 'term_mandel' << 'term_display'
+  executables.merge Dir['bin/*'].map { |x| File.basename(x) }
 
   dependency             'tins', '~>1.0'
   development_dependency 'simplecov'
+  development_dependency 'minitest_tu_shim'
 
   install_library do
     destdir = "#{ENV['DESTDIR']}"

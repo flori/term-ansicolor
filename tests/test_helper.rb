@@ -4,5 +4,6 @@ if ENV['START_SIMPLECOV'].to_i == 1
     add_filter "#{File.basename(File.dirname(__FILE__))}/"
   end
 end
+require 'minitest/unit'
 require 'test/unit'
 require 'term/ansicolor'
