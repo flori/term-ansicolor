@@ -5,9 +5,7 @@ require 'term/ansicolor'
 # Use this trick to work around namespace cluttering that
 # happens if you just include Term::ANSIColor:
 
-class Color
-  extend Term::ANSIColor
-end
+Color = Object.new.extend Term::ANSIColor
 
 print Color.red, Color.bold, "No Namespace cluttering:", Color.clear, "\n"
 print Color.green + "green" + Color.clear, "\n"
