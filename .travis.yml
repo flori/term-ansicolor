@@ -6,6 +6,5 @@ rvm:
   - 2.1
   - ruby-head
   - ree
-  - rbx
   - jruby-18mode
   - jruby-19mode
