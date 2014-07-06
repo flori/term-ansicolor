@@ -3,6 +3,10 @@ require 'test_helper'
 class AttributeTest < Test::Unit::TestCase
   include Term::ANSIColor
 
+  def test_clean_string
+    assert_equal nil, String < Term::ANSIColor
+  end
+
   def test_cast
     color = Attribute.get(:color123)
     on_color = Attribute.get(:on_color123)

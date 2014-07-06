@@ -10,6 +10,10 @@ class RGBColorMetrics < Test::Unit::TestCase
     @bright_orange = RGBTriple.new(0, 200, 128)
   end
 
+  def test_clean_string
+    assert_equal nil, String < Term::ANSIColor
+  end
+
   def test_metric_getters
     assert_raises(ArgumentError) { RGBColorMetrics.metric('Foo') }
     assert_equal RGBColorMetrics::Euclidean, RGBColorMetrics.metric('Euclidean')

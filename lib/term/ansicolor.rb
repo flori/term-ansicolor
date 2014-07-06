@@ -25,7 +25,7 @@ module Term
     def support?(feature)
       case feature
       when :clear
-        !String.instance_methods(false).map(&:to_sym).include?(:clear)
+        !String.method_defined?(:clear)
       end
     end
     # Returns true, if the coloring function of this module
@@ -56,31 +56,40 @@ module Term
     end
 
     # Regular expression that is used to scan for ANSI-Attributes while
-    # uncoloring strings.
+    # decoloring strings.
     COLORED_REGEXP = /\e\[(?:(?:[349]|10)[0-7]|[0-9]|[34]8;5;\d{1,3})?m/
 
     # Returns an uncolored version of the string, that is all
     # ANSI-Attributes are stripped from the string.
-    def uncolor(string = nil) # :yields:
-      if block_given?
-        yield.to_str.gsub(COLORED_REGEXP, '')
-      elsif string.respond_to?(:to_str)
-        string.to_str.gsub(COLORED_REGEXP, '')
-      elsif respond_to?(:to_str)
-        to_str.gsub(COLORED_REGEXP, '')
-      else
-        ''
-      end
+    def decolor(string = nil) # :yields:
+      new_string_like(
+        if block_given?
+          yield.to_str.gsub(COLORED_REGEXP, '')
+        elsif string.respond_to?(:to_str)
+          string.to_str.gsub(COLORED_REGEXP, '')
+        elsif respond_to?(:to_str)
+          to_str.gsub(COLORED_REGEXP, '')
+        else
+          ''
+        end
+      )
     end
 
-    alias uncolored uncolor
+    alias uncolor decolor
+
+    alias uncolored decolor
+
+    def new_string_like(string = '')
+      respond_to?(:to_str) ? self.class.new(string) : string
+    end
+    private :new_string_like
 
     # Return +string+ or the result string of the given +block+ colored with
     # color +name+. If string isn't a string only the escape sequence to switch
     # on the color +name+ is returned.
     def color(name, string = nil, &block)
       attribute = Attribute[name] or raise ArgumentError, "unknown attribute #{name.inspect}"
-      result = ''
+      result = new_string_like
       result << "\e[#{attribute.code}m" if Term::ANSIColor.coloring?
       if block_given?
         result << yield
@@ -89,9 +98,9 @@ module Term
       elsif respond_to?(:to_str)
         result << to_str
       else
-        return result #only switch on
+        return result # only switch on
       end
-      result << "\e[0m" if Term::ANSIColor.coloring?
+      result << "\e[0m" if ::Term::ANSIColor.coloring?
       result
     end
 
@@ -118,4 +127,8 @@ module Term
 
     extend self
   end
+end
+
+if Module.private_method_defined?(:refine) && Module.private_method_defined?(:using)
+  require 'term/ansicolor/refinement'
 end
