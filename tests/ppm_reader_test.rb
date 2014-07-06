@@ -4,6 +4,10 @@ require 'digest/md5'
 class PPMReaderTest < Test::Unit::TestCase
   include Term::ANSIColor
 
+  def test_clean_string
+    assert_equal nil, String < Term::ANSIColor
+  end
+
   def test_loading_ppm6
     File.open(example_path('lambda-red.ppm')) do |ppm6|
       ppm_reader = PPMReader.new(ppm6)

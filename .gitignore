@@ -1,4 +1,5 @@
 .*.sw[pon]
+.DS_Store
 .bundle
 .rvmrc
 Gemfile.lock

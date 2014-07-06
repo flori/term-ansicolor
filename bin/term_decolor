@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-## Little unix filter that uncolorizes any input stream.
+## Little unix filter that decolorizes any input stream.
 #
 
 require 'term/ansicolor'
@@ -8,5 +8,5 @@ require 'term/ansicolor'
 include Term::ANSIColor
 
 ARGF.each do |line|
-  puts line.uncolored
+  puts line.decolor
 end

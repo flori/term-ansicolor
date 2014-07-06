@@ -13,7 +13,9 @@ GemHadar do
   description 'This library uses ANSI escape sequences to control the attributes of terminal output'
   licenses    << 'GPL-2'
   test_dir    'tests'
-  ignore      '.*.sw[pon]', 'pkg', 'Gemfile.lock', '.rvmrc', 'coverage', 'tags', '.bundle'
+  ignore      '.*.sw[pon]', 'pkg', 'Gemfile.lock', '.rvmrc', 'coverage',
+    'tags', '.bundle', '.DS_Store'
+
   readme      'README.rdoc'
   executables.merge Dir['bin/*'].map { |x| File.basename(x) }
 
