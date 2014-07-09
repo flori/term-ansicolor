@@ -12,6 +12,14 @@ class StringLike
   def to_str
     @string
   end
+
+  def respond_to?(*a)
+    @string.respond_to?(*a) || super
+  end
+
+  def method_missing(*a)
+    @string.__send__(*a)
+  end
 end
 
 class MyString < String
@@ -36,8 +44,20 @@ class ANSIColorTest < Test::Unit::TestCase
     assert_equal nil, String < Term::ANSIColor
   end
 
+  def test_invalid_function_arguments
+    assert_raises ArgumentError do Color.red('foo') { 'bar' } end
+    assert_raises ArgumentError do Color.uncolor('foo') { 'bar' } end
+  end
+
   def test_red
     assert_equal string_red, string.red
+    object = Object.new
+    def object.to_s
+      'foo'
+    end
+    object.extend Term::ANSIColor
+    assert_equal "\e[31m", object.red # to_s == 'foo' will be ignored
+    assert_equal "\e[31mfoo\e[0m", Color.red(object)
     assert_equal string_red, Color.red(string)
     assert_equal string_red, Color.red { string }
     assert_equal string_red, Term::ANSIColor.red { string }
@@ -90,14 +110,21 @@ class ANSIColorTest < Test::Unit::TestCase
   def test_decolor
     assert_equal string, string_red.decolor
     assert_equal string, Color.decolor(string_red)
-    assert_equal string, Color.decolor(string_like_red)
+    assert_equal string, Color.decolor(string_like_red).to_str
     assert_equal string, Color.decolor { string_red }
     assert_equal string, Color.decolor { string_like_red }
     assert_equal string, Term::ANSIColor.decolor { string_red }
     assert_equal string, Term::ANSIColor.decolor { string_like_red }
     assert_equal string, decolor { string }
     assert_equal string, decolor { string_like_red }
-    assert_equal "", decolor(Object.new)
+    object = Object.new
+    def object.to_s
+      Term::ANSIColor.red('some object')
+    end
+    object.extend Term::ANSIColor
+    assert_equal "\e[31msome object\e[0m", object.to_s
+    assert_equal "some object", decolor(object)
+    assert_equal "some object", object.decolor
     for index in 0..255
       assert_equal @foo, Color.decolor(Color.color("color#{index}", @foo))
       assert_equal @foo, Color.decolor(Color.on_color("color#{index}", @foo))
@@ -125,7 +152,7 @@ class ANSIColorTest < Test::Unit::TestCase
   end
 
   def test_coloring_string_like
-    assert_equal "\e[31mred\e[0m", red(string_like)
+    assert_equal "\e[31mred\e[0m", red(string_like).to_str
   end
 
   def test_frozen
