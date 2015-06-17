@@ -1,14 +1,14 @@
 # -*- encoding: utf-8 -*-
-# stub: term-ansicolor 1.3.0 ruby lib
+# stub: term-ansicolor 1.3.1 ruby lib
 
 Gem::Specification.new do |s|
   s.name = "term-ansicolor"
-  s.version = "1.3.0"
+  s.version = "1.3.1"
 
-  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
+  s.required_rubygems_version = Gem::Requirement.new(">= 1.9") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Florian Frank"]
-  s.date = "2014-07-05"
+  s.date = "2015-06-17"
   s.description = "This library uses ANSI escape sequences to control the attributes of terminal output"
   s.email = "flori@ping.de"
   s.executables = ["term_cdiff", "term_colortab", "term_decolor", "term_display", "term_mandel"]
@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://flori.github.com/term-ansicolor"
   s.licenses = ["GPL-2"]
   s.rdoc_options = ["--title", "Term-ansicolor - Ruby library that colors strings using ANSI escape sequences", "--main", "README.rdoc"]
-  s.rubygems_version = "2.2.2"
+  s.rubygems_version = "2.4.6"
   s.summary = "Ruby library that colors strings using ANSI escape sequences"
   s.test_files = ["tests/ansicolor_test.rb", "tests/attribute_test.rb", "tests/ppm_reader_test.rb", "tests/rgb_color_metrics_test.rb", "tests/rgb_triple_test.rb", "tests/test_helper.rb"]
 
@@ -25,18 +25,18 @@ Gem::Specification.new do |s|
     s.specification_version = 4
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_development_dependency(%q<gem_hadar>, ["~> 1.0.0"])
+      s.add_development_dependency(%q<gem_hadar>, ["~> 1.3.0"])
       s.add_development_dependency(%q<simplecov>, [">= 0"])
       s.add_development_dependency(%q<minitest_tu_shim>, [">= 0"])
       s.add_runtime_dependency(%q<tins>, ["~> 1.0"])
     else
-      s.add_dependency(%q<gem_hadar>, ["~> 1.0.0"])
+      s.add_dependency(%q<gem_hadar>, ["~> 1.3.0"])
       s.add_dependency(%q<simplecov>, [">= 0"])
       s.add_dependency(%q<minitest_tu_shim>, [">= 0"])
       s.add_dependency(%q<tins>, ["~> 1.0"])
     end
   else
-    s.add_dependency(%q<gem_hadar>, ["~> 1.0.0"])
+    s.add_dependency(%q<gem_hadar>, ["~> 1.3.0"])
     s.add_dependency(%q<simplecov>, [">= 0"])
     s.add_dependency(%q<minitest_tu_shim>, [">= 0"])
     s.add_dependency(%q<tins>, ["~> 1.0"])

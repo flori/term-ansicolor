@@ -21,6 +21,8 @@ GemHadar do
   development_dependency 'simplecov'
   development_dependency 'minitest_tu_shim'
 
+  required_ruby_version '>= 1.9'
+
   install_library do
     destdir = "#{ENV['DESTDIR']}"
     libdir = CONFIG["sitelibdir"]

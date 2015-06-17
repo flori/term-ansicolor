@@ -104,16 +104,16 @@ class ANSIColorTest < Test::Unit::TestCase
     for a in Term::ANSIColor.attributes
       # skip clear for Ruby 1.9 which implements String#clear to empty the string
       if a != :clear || Term::ANSIColor.support?(:clear)
-        assert_not_equal foo, foo_colored = foo.__send__(a)
+        refute_equal foo, foo_colored = foo.__send__(a)
         assert_equal foo, foo_colored.uncolor
       end
-      assert_not_equal foo, foo_colored = Color.__send__(a, foo)
+      refute_equal foo, foo_colored = Color.__send__(a, foo)
       assert_equal foo, Color.uncolor(foo_colored)
-      assert_not_equal foo, foo_colored = Color.__send__(a) { foo }
+      refute_equal foo, foo_colored = Color.__send__(a) { foo }
       assert_equal foo, Color.uncolor { foo_colored }
-      assert_not_equal foo, foo_colored = Term::ANSIColor.__send__(a) { foo }
+      refute_equal foo, foo_colored = Term::ANSIColor.__send__(a) { foo }
       assert_equal foo, Term::ANSIColor.uncolor { foo_colored }
-      assert_not_equal foo, foo_colored = __send__(a) { foo }
+      refute_equal foo, foo_colored = __send__(a) { foo }
       assert_equal foo, uncolor { foo_colored }
     end
     assert_equal Term::ANSIColor.attributes, 'foo'.attributes
