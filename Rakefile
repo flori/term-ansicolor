@@ -19,6 +19,7 @@ GemHadar do
 
   dependency             'tins', '~>1.0'
   development_dependency 'simplecov'
+  development_dependency 'minitest_tu_shim'
 
   install_library do
     destdir = "#{ENV['DESTDIR']}"

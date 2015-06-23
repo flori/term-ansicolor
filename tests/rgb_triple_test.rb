@@ -8,7 +8,7 @@ class RgbTripleTest < Test::Unit::TestCase
     assert_equal '#8000ff', RGBTriple[ rgb ].html
     assert_equal '#8000ff', RGBTriple[ [ 128, 0, 255 ] ].html
     assert_equal '#8000ff', RGBTriple[ :red => 128, :green => 0, :blue => 255 ].html
-    assert_raise ArgumentError do
+    assert_raises ArgumentError do
       RGBTriple[ nil ]
     end
   end

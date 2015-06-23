@@ -11,7 +11,7 @@ class RGBColorMetrics < Test::Unit::TestCase
   end
 
   def test_metric_getters
-    assert_raise(ArgumentError) { RGBColorMetrics.metric('Foo') }
+    assert_raises(ArgumentError) { RGBColorMetrics.metric('Foo') }
     assert_equal RGBColorMetrics::Euclidean, RGBColorMetrics.metric('Euclidean')
     assert_equal RGBColorMetrics::Euclidean, RGBColorMetrics.metric(:Euclidean)
     assert_operator RGBColorMetrics.metrics.size, :>, 1
