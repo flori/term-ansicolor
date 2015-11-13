@@ -10,5 +10,6 @@ matrix:
     - rvm: ruby-head
     - rvm: jruby-head
     - rvm: rbx-20mode
+env:
   - CODECLIMATE_REPO_TOKEN=ef2c31d6fd3c385eef57dcb62374be51b56af36dd4405763d3e43a1c06330b33
 sudo: false
