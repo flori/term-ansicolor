@@ -45,8 +45,12 @@ module Term
         @__store__[name.to_sym]
       end
 
-      def self.rgb_colors(&block)
-        @rgb_colors ||= attributes.select(&:rgb_color?).each(&block)
+      def self.rgb_colors(options = {}, &block)
+        colors = @rgb_colors ||= attributes.select(&:rgb_color?)
+        if options.key?(:gray) && !options[:gray]
+          colors = colors.reject(&:gray?)
+        end
+        colors.each(&block)
       end
 
       def self.named_attributes(&block)
@@ -55,19 +59,13 @@ module Term
 
       def self.nearest_rgb_color(color, options = {})
         rgb = RGBTriple[color]
-        colors = rgb_colors
-        if options.key?(:gray) && !options[:gray]
-          colors = colors.reject(&:gray?)
-        end
+        colors = rgb_colors(options)
         colors.reject(&:background?).min_by { |c| c.distance_to(rgb, options) }
       end
 
       def self.nearest_rgb_on_color(color, options = {})
         rgb = RGBTriple[color]
-        colors = rgb_colors
-        if options.key?(:gray) && !options[:gray]
-          colors = colors.reject(&:gray?)
-        end
+        colors = rgb_colors(options)
         colors.select(&:background?).min_by { |c| c.distance_to(rgb, options) }
       end
 
