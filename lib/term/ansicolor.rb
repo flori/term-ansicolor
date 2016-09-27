@@ -70,7 +70,7 @@ module Term
         to_str.gsub(COLORED_REGEXP, '')
       else
         ''
-      end
+      end.extend(Term::ANSIColor)
     end
 
     alias uncolored uncolor
@@ -92,7 +92,7 @@ module Term
         return result #only switch on
       end
       result << "\e[0m" if Term::ANSIColor.coloring?
-      result
+      result.extend(Term::ANSIColor)
     end
 
     def on_color(name, string = nil, &block)

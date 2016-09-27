@@ -1,5 +1,7 @@
 require 'test_helper'
 
+OldString = String.dup
+
 class String
   include Term::ANSIColor
 end
@@ -129,5 +131,12 @@ class ANSIColorTest < Test::Unit::TestCase
     string.extend(Term::ANSIColor).freeze
     assert string.frozen?
     assert_equal red, string.red
+  end
+
+  def test_extending
+    string = OldString.new('new')
+    assert_equal false, Term::ANSIColor === string
+    string = Color.red(string)
+    assert_kind_of Term::ANSIColor, 'new'
   end
 end
