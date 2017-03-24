@@ -3,12 +3,11 @@ rvm:
   - 2.1
   - 2.2
   - 2.3.1
+  - 2.4.1
   - ruby-head
   - jruby
 matrix:
   allow_failures:
     - rvm: ruby-head
     - rvm: jruby
-env:
-  - CODECLIMATE_REPO_TOKEN=ef2c31d6fd3c385eef57dcb62374be51b56af36dd4405763d3e43a1c06330b33
 sudo: false
