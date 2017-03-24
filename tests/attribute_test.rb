@@ -39,14 +39,14 @@ class AttributeTest < Test::Unit::TestCase
   def test_nearest_rgb_color
     assert_equal Attribute.get(:color0).rgb, Attribute.nearest_rgb_color('#000').rgb
     assert_equal Attribute.get(:color15).rgb, Attribute.nearest_rgb_color('#ffffff').rgb
-    assert_equal :color247, Attribute.nearest_rgb_color('#aaa').name
+    assert_equal :color248, Attribute.nearest_rgb_color('#aaa').name
     assert_equal :color109, Attribute.nearest_rgb_color('#aaa', :gray => false).name
   end
 
   def test_nearest_rgb_on_color
     assert_equal Attribute.get(:on_color0).rgb, Attribute.nearest_rgb_on_color('#000').rgb
     assert_equal Attribute.get(:on_color15).rgb, Attribute.nearest_rgb_on_color('#ffffff').rgb
-    assert_equal :on_color247, Attribute.nearest_rgb_on_color('#aaa').name
+    assert_equal :on_color248, Attribute.nearest_rgb_on_color('#aaa').name
     assert_equal :on_color109, Attribute.nearest_rgb_on_color('#aaa', :gray => false).name
   end
 

@@ -20,7 +20,7 @@ module Term
         when /\A#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})\z/i
           new(*$~.captures.map { |c| convert_value(c.to_i(16)) })
         when /\A#([0-9a-f])([0-9a-f])([0-9a-f])\z/i
-          new(*$~.captures.map { |c| convert_value(c.to_i(16) << 4) })
+          new(*$~.captures.map { |c| convert_value((c + c).to_i(16)) })
         end
       end
 
