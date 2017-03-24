@@ -83,7 +83,7 @@ module Term
       result = ''
       result << "\e[#{attribute.code}m" if Term::ANSIColor.coloring?
       if block_given?
-        result << yield
+        result << yield.to_s
       elsif string.respond_to?(:to_str)
         result << string.to_str
       elsif respond_to?(:to_str)
