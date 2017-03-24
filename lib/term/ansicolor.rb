@@ -1,3 +1,5 @@
+require 'tins/xt/full'
+
 module Term
 
   # The ANSIColor module can be used for namespacing and mixed into your own
@@ -6,6 +8,7 @@ module Term
     require 'term/ansicolor/version'
     require 'term/ansicolor/attribute'
     require 'term/ansicolor/rgb_triple'
+    require 'term/ansicolor/hsl_triple'
     require 'term/ansicolor/ppm_reader'
     require 'term/ansicolor/attribute/text'
     require 'term/ansicolor/attribute/color8'

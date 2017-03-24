@@ -9,6 +9,8 @@ class RgbTripleTest < Test::Unit::TestCase
     assert_equal '#8000ff', RGBTriple[ [ 128, 0, 255 ] ].html
     assert_equal '#8000ff', RGBTriple[ :red => 128, :green => 0, :blue => 255 ].html
     assert_equal '#11ddff', RGBTriple[ '#1df' ].html
+    assert_equal '#8000ff', RGBTriple[ 'rgb(128,0,255)' ].html
+    assert_equal '#85e085', RGBTriple[ 'hsl(120.0,59.4%,70.0%)' ].html
     assert_raises ArgumentError do
       RGBTriple[ nil ]
     end
@@ -17,6 +19,13 @@ class RgbTripleTest < Test::Unit::TestCase
   def test_rgb_to_a
     rgb = RGBTriple.new(128, 0, 255)
     assert_equal [ 128, 0, 255 ], rgb.to_a
+  end
+
+  def test_percentages
+    rgb = RGBTriple.new(128, 0, 255)
+    assert_in_delta 50.19, rgb.red_p, 1e-2
+    assert_in_delta 0.0, rgb.green_p, 1e-2
+    assert_in_delta 100.0, rgb.blue_p, 1e-2
   end
 
   def test_rgb_distance
@@ -68,5 +77,25 @@ class RgbTripleTest < Test::Unit::TestCase
     assert_equal 204, g2[4].green
     assert_equal 204, g2[4].blue
     assert_equal rgb2, g2[5]
+  end
+
+  def test_invert
+    assert_equal RGBTriple.new(127, 255, 0), RGBTriple.new(128, 0, 255).invert
+  end
+
+  def test_css
+    rgb = RGBTriple.new(128, 0, 255)
+    assert_equal 'rgb(128,0,255)', rgb.css
+    assert_equal '#8000ff', RGBTriple.from_css('rgb(128,0,255)').html
+    assert_match /rgb\(50\.19.*?%,0\.0%,100.0%\)/, rgb.css(percentage: true)
+    assert_equal '#8000ff', RGBTriple.from_css('rgb(50.19607843137255%,0.0%,100.0%)').html
+  end
+
+  def test_color
+    assert_equal "\e[38;5;93mfoo\e[0m", RGBTriple.new(128, 0, 255).color('foo')
+  end
+
+  def test_method_missing
+    assert_raise(NoMethodError) { RGBTriple.new(0, 0, 0).foo }
   end
 end

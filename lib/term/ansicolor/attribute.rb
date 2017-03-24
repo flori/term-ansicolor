@@ -34,6 +34,7 @@ module Term
         case
         when self === name                              then name
         when Array === name                             then nearest_rgb_color name
+        when name.respond_to?(:to_rgb_triple)           then nearest_rgb_color(name.to_rgb_triple.to_a)
         when name.to_s =~ /\A(on_)?(\d+)\z/             then get "#$1color#$2"
         when name.to_s =~ /\A#([0-9a-f]{3}){1,2}\z/i    then nearest_rgb_color name
         when name.to_s =~ /\Aon_#([0-9a-f]{3}){1,2}\z/i then nearest_rgb_on_color name

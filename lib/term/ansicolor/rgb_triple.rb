@@ -5,11 +5,11 @@ module Term
     class RGBTriple
       include Term::ANSIColor::RGBColorMetricsHelpers::WeightedEuclideanDistance
 
-      def self.convert_value(color)
+      def self.convert_value(color, max: 255)
         color.nil? and raise ArgumentError, "missing color value"
         color = Integer(color)
-        (0..0xff) === color or raise ArgumentError,
-          "color value #{color.inspect} not between 0 and 255"
+        (0..max) === color or raise ArgumentError,
+          "color value #{color.inspect} not between 0 and #{max}"
         color
       end
 
@@ -21,6 +21,15 @@ module Term
           new(*$~.captures.map { |c| convert_value(c.to_i(16)) })
         when /\A#([0-9a-f])([0-9a-f])([0-9a-f])\z/i
           new(*$~.captures.map { |c| convert_value((c + c).to_i(16)) })
+        end
+      end
+
+      def self.from_css(css)
+        case css
+        when /\A\s*rgb\(\s*([^%\s]+)\s*%\s*,\s*([^%\s]+)\s*%\s*,\s*([^%\s]+)\s*%\s*\)\z/
+          new(*$~.captures.map { |c| convert_value(((Float(c) / 100) * 0xff).round) })
+        when /\A\s*rgb\(\s*([^,\s]+)\s*,\s*([^,\s]+)\s*,\s*([^\)\s]+)\s*\)\z/
+          new(*$~.captures.map { |c| convert_value((Float(c)).round) })
         end
       end
 
@@ -38,16 +47,21 @@ module Term
 
       def self.[](thing)
         case
-        when thing.respond_to?(:to_rgb_triple) then thing
-        when thing.respond_to?(:to_ary)        then RGBTriple.from_array(thing.to_ary)
-        when thing.respond_to?(:to_str)        then RGBTriple.from_html(thing.to_str.sub(/\Aon_/, '')) # XXX somewhat hacky
-        when thing.respond_to?(:to_hash)       then RGBTriple.from_hash(thing.to_hash)
+        when thing.respond_to?(:to_rgb_triple) then thing.to_rgb_triple
+        when thing.respond_to?(:to_ary)        then from_array(thing.to_ary)
+        when thing.respond_to?(:to_str)
+          thing = thing.to_str
+          from_html(thing.sub(/\Aon_/, '')) || from_css(thing) ||
+            Term::ANSIColor::HSLTriple.from_css(thing).full?(:to_rgb_triple)
+        when thing.respond_to?(:to_hash)       then from_hash(thing.to_hash)
         else raise ArgumentError, "cannot convert #{thing.inspect} into #{self}"
         end
       end
 
       def initialize(red, green, blue)
-        @values = [ red, green, blue ]
+        @values = [ red, green, blue ].map { |v|
+          [ [ Integer(v), 0 ].max, 0xff ].min
+        }
       end
 
       def red
@@ -62,6 +76,26 @@ module Term
         @values[2]
       end
 
+      def percentages
+        @percentages ||= @values.map { |v| 100 * v / 255.0 }
+      end
+
+      def red_p
+        percentages[0]
+      end
+
+      def green_p
+        percentages[1]
+      end
+
+      def blue_p
+        percentages[2]
+      end
+
+      def invert
+        self.class.new(255 - red, 255 - green, 255 - blue)
+      end
+
       def gray?
         red != 0 && red != 0xff && red == green && green == blue && blue == red
       end
@@ -72,8 +106,20 @@ module Term
         s
       end
 
+      def css(percentage: false)
+        if percentage
+          "rgb(%s%%,%s%%,%s%%)" % @values.map { |v| 100.0 * v / 255 }
+        else
+          "rgb(%u,%u,%u)" % @values
+        end
+      end
+
       def to_rgb_triple
         self
+      end
+
+      def to_hsl_triple
+        Term::ANSIColor::HSLTriple.from_rgb_triple(self)
       end
 
       attr_reader :values
@@ -84,7 +130,11 @@ module Term
       end
 
       def ==(other)
-        @values == other.values
+        @values == other.to_rgb_triple.values
+      end
+
+      def color(string)
+        Term::ANSIColor.color(self, string)
       end
 
       def distance_to(other, options = {})
@@ -115,6 +165,14 @@ module Term
           s -= 1
         end
         gradient << other
+      end
+
+      def method_missing(name, *args, &block)
+        if Term::ANSIColor::HSLTriple.method_defined?(name)
+          to_hsl_triple.send(name, *args, &block)
+        else
+          super
+        end
       end
     end
   end

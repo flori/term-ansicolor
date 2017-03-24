@@ -13,25 +13,15 @@ GemHadar do
   description 'This library uses ANSI escape sequences to control the attributes of terminal output'
   licenses    << 'GPL-2'
   test_dir    'tests'
-  ignore      '.*.sw[pon]', 'pkg', 'Gemfile.lock', '.rvmrc', 'coverage', 'tags', '.bundle'
+  ignore      '.*.sw[pon]', 'pkg', 'Gemfile.lock', '.rvmrc', 'coverage',
+    'tags', '.bundle', '.byebug_history'
+
   readme      'README.rdoc'
   executables.merge Dir['bin/*'].map { |x| File.basename(x) }
 
   dependency             'tins', '~>1.0'
   development_dependency 'simplecov'
-  development_dependency 'minitest_tu_shim'
+  development_dependency 'test-unit'
 
   required_ruby_version '>= 2.0'
-
-  install_library do
-    destdir = "#{ENV['DESTDIR']}"
-    libdir = CONFIG["sitelibdir"]
-    cd 'lib' do
-      for file in Dir['**/*.rb']
-        dest = destdir + File.join(libdir, File.dirname(file))
-        mkdir_p dest
-        install file, dest
-      end
-    end
-  end
 end
