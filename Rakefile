@@ -11,12 +11,13 @@ GemHadar do
   homepage    "http://flori.github.com/#{name}"
   summary     'Ruby library that colors strings using ANSI escape sequences'
   description 'This library uses ANSI escape sequences to control the attributes of terminal output'
-  licenses    << 'GPL-2'
+  licenses    << 'Apache-2.0'
+
   test_dir    'tests'
   ignore      '.*.sw[pon]', 'pkg', 'Gemfile.lock', '.rvmrc', 'coverage',
     'tags', '.bundle', '.byebug_history'
 
-  readme      'README.rdoc'
+  readme      'README.md'
   executables.merge Dir['bin/*'].map { |x| File.basename(x) }
 
   dependency             'tins', '~>1.0'
