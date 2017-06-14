@@ -22,9 +22,9 @@ The homepage of this library is located at
 
 The following executables are provided with Term::ANSIColor:
 
-* `cdiff`: colors a diff patch
-* `decolor`: decolors any text file that was colored with ANSI escape sequences
-* `colortab`: Displays a table of the 256 terminal colors with their indices and
+* `term_cdiff`: colors a diff patch
+* `term_decolor`: decolors any text file that was colored with ANSI escape sequences
+* `term_colortab`: Displays a table of the 256 terminal colors with their indices and
   nearest html equivalents.
 * `term_display`: displays a ppm3 or ppm6 image file in the terminal. If the netpbm
   programs are installed it can handle a lot of other image file formats.
