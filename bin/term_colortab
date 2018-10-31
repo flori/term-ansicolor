@@ -24,6 +24,7 @@ for c in 4..7
   print_color c
 end
 puts
+puts
 
 for c in 8..11
   print_color c
@@ -33,16 +34,16 @@ puts
 for c in 12..15
   print_color c
 end
-puts
 
 for c in 16..231
   (c - 16) % 6 == 0 and puts
+  (c - 16) % 36 == 0 and puts
   print_color c
 end
-puts
 
 for c in 232..255
   (c - 16) % 6 == 0 and puts
+  (c - 16) % 12 == 0 and puts
   print_color c
 end
 puts
