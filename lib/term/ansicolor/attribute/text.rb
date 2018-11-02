@@ -2,7 +2,7 @@ module Term
   module ANSIColor
     class Attribute
       class Text
-        Attribute.set :clear,         0 # String#clear is already used to empty string in Ruby 1.9
+        Attribute.set :clear,         0 # String#clear already used in String
         Attribute.set :reset,         0 # synonym for :clear
         Attribute.set :bold,          1
         Attribute.set :dark,          2
@@ -12,8 +12,10 @@ module Term
         Attribute.set :underscore,    4 # synonym for :underline
         Attribute.set :blink,         5
         Attribute.set :rapid_blink,   6 # not widely implemented
-        Attribute.set :negative,      7 # no reverse because of String#reverse
+        Attribute.set :reverse,       7 # String#reverse already used in String
+        Attribute.set :negative,      7 # synonym for :reverse
         Attribute.set :concealed,     8
+        Attribute.set :conceal,       8 # synonym for :concealed
         Attribute.set :strikethrough, 9 # not widely implemented
       end
     end

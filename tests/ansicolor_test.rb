@@ -104,8 +104,8 @@ class ANSIColorTest < Test::Unit::TestCase
   def test_attributes
     foo = 'foo'
     for a in Term::ANSIColor.attributes
-      # skip clear for Ruby 1.9 which implements String#clear to empty the string
-      if a != :clear || Term::ANSIColor.support?(:clear)
+      # skip :clear and :reverse b/c Ruby implements them on string
+      if a != :clear && a != :reverse || Term::ANSIColor.support?(:clear)
         refute_equal foo, foo_colored = foo.__send__(a)
         assert_equal foo, foo_colored.uncolor
       end
