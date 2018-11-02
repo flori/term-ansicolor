@@ -27,8 +27,8 @@ class HSLTripleTest < Test::Unit::TestCase
     assert_in_delta @pastel_green_hsl.hue, hsl.hue, 1e-1
     assert_in_delta @pastel_green_hsl.saturation, hsl.saturation, 1e-1
     assert_in_delta @pastel_green_hsl.lightness, hsl.lightness, 1e-1
-    assert_match /hsl\(0\.0,0\.0%,53.3333.*?%\)/, @gray_rgb.to_hsl_triple.css
-    assert_match /hsl\(120\.0.*?,58\.82.*?%,20.0%\)/, RGBTriple[ '#155115' ].to_hsl_triple.css
+    assert_match(/hsl\(0\.0,0\.0%,53.3333.*?%\)/, @gray_rgb.to_hsl_triple.css)
+    assert_match(/hsl\(120\.0.*?,58\.82.*?%,20.0%\)/, RGBTriple[ '#155115' ].to_hsl_triple.css)
   end
 
   def test_conversion_to_rgb

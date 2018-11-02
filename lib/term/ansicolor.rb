@@ -14,6 +14,9 @@ module Term
     require 'term/ansicolor/attribute/color8'
     require 'term/ansicolor/attribute/intense_color8'
     require 'term/ansicolor/attribute/color256'
+    require 'term/ansicolor/movement'
+
+    include Term::ANSIColor::Movement
 
     # :stopdoc:
     ATTRIBUTE_NAMES = Attribute.named_attributes.map(&:name)

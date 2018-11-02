@@ -87,7 +87,7 @@ class RgbTripleTest < Test::Unit::TestCase
     rgb = RGBTriple.new(128, 0, 255)
     assert_equal 'rgb(128,0,255)', rgb.css
     assert_equal '#8000ff', RGBTriple.from_css('rgb(128,0,255)').html
-    assert_match /rgb\(50\.19.*?%,0\.0%,100.0%\)/, rgb.css(percentage: true)
+    assert_match(/rgb\(50\.19.*?%,0\.0%,100.0%\)/, rgb.css(percentage: true))
     assert_equal '#8000ff', RGBTriple.from_css('rgb(50.19607843137255%,0.0%,100.0%)').html
   end
 

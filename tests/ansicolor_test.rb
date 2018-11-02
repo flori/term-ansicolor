@@ -121,6 +121,24 @@ class ANSIColorTest < Test::Unit::TestCase
     assert_equal Term::ANSIColor.attributes, 'foo'.attributes
   end
 
+  def test_move_to
+    string_23_23 = "\e[23;23Hred"
+    assert_equal string_23_23, string.move_to(23, 23)
+    assert_equal string_23_23, Color.move_to(23, 23, string)
+    assert_equal string_23_23, Color.move_to(23, 23) { string }
+    assert_equal string_23_23, Term::ANSIColor.move_to(23, 23) { string }
+    assert_equal string_23_23, move_to(23, 23) { string }
+  end
+
+  def test_return_to_position
+    string_return = "\e[sred\e[u"
+    assert_equal string_return, string.return_to_position
+    assert_equal string_return, Color.return_to_position(string)
+    assert_equal string_return, Color.return_to_position { string }
+    assert_equal string_return, Term::ANSIColor.return_to_position { string }
+    assert_equal string_return, return_to_position { string }
+  end
+
   def test_coloring_string_like
     assert_equal "\e[31mred\e[0m", red(string_like)
   end
