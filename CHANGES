@@ -1,3 +1,4 @@
+2019-01-18 - 1.7.1 * Fix term_display command for never tins
 2018-11-02 - 1.7.0 * Add movement commands and term_snow executable
 2017-03-24 - 1.6.0 * Implement HSL colors and methods based on that code
 2017-04-13 - 1.5.0 * Change to Apache 2.0 license
