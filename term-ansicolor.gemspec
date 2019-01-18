@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
   s.authors = ["Florian Frank".freeze]
-  s.date = "2018-11-02"
+  s.date = "2019-01-18"
   s.description = "This library uses ANSI escape sequences to control the attributes of terminal output".freeze
   s.email = "flori@ping.de".freeze
   s.executables = ["term_snow".freeze, "term_display".freeze, "term_decolor".freeze, "term_cdiff".freeze, "term_mandel".freeze, "term_colortab".freeze]
@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.licenses = ["Apache-2.0".freeze]
   s.rdoc_options = ["--title".freeze, "Term-ansicolor - Ruby library that colors strings using ANSI escape sequences".freeze, "--main".freeze, "README.md".freeze]
   s.required_ruby_version = Gem::Requirement.new(">= 2.0".freeze)
-  s.rubygems_version = "2.7.7".freeze
+  s.rubygems_version = "3.0.1".freeze
   s.summary = "Ruby library that colors strings using ANSI escape sequences".freeze
   s.test_files = ["tests/ansicolor_test.rb".freeze, "tests/attribute_test.rb".freeze, "tests/hsl_triple_test.rb".freeze, "tests/ppm_reader_test.rb".freeze, "tests/rgb_color_metrics_test.rb".freeze, "tests/rgb_triple_test.rb".freeze, "tests/test_helper.rb".freeze]
 
