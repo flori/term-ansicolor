@@ -29,6 +29,7 @@ The following executables are provided with Term::ANSIColor:
 * `term_display`: displays a ppm3 or ppm6 image file in the terminal. If the netpbm
   programs are installed it can handle a lot of other image file formats.
 * `term_mandel`: displays the mandelbrot set in the terminal
+* `term_snow`: displays a snowfall animation in the terminal
 
 Additionally the file examples/example.rb in the source/gem-distribution shows
 how this library can be used.
