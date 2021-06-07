@@ -16,7 +16,7 @@ Use rubygems to install the gem:
 
 The homepage of this library is located at
 
-* http://flori.github.com/term-ansicolor
+* https://github.com/flori/term-ansicolor
 
 ## Examples
 
