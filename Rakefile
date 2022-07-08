@@ -23,6 +23,5 @@ GemHadar do
   dependency             'tins', '~>1.0'
   development_dependency 'simplecov'
   development_dependency 'test-unit'
-
-  required_ruby_version '>= 2.0'
+  development_dependency 'utils'
 end
