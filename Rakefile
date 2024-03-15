@@ -8,7 +8,7 @@ GemHadar do
   path_module 'Term::ANSIColor'
   author      'Florian Frank'
   email       'flori@ping.de'
-  homepage    "http://flori.github.com/#{name}"
+  homepage    "https://github.com/flori/#{name}"
   summary     'Ruby library that colors strings using ANSI escape sequences'
   description 'This library uses ANSI escape sequences to control the attributes of terminal output'
   licenses    << 'Apache-2.0'
