@@ -94,6 +94,7 @@ module Term
       private
 
       def move_command(move, string = nil)
+        move = +move
         if block_given?
           move << yield.to_s
         elsif string.respond_to?(:to_str)
