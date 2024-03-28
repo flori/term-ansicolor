@@ -101,7 +101,7 @@ module Term
       end
 
       def html
-        s = '#'
+        s = +'#'
         @values.each { |c| s << '%02x' % c }
         s
       end

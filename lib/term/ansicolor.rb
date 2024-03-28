@@ -75,7 +75,7 @@ module Term
       elsif respond_to?(:to_str)
         to_str.gsub(COLORED_REGEXP, '')
       else
-        ''
+        +''
       end.extend(Term::ANSIColor)
     end
 
@@ -86,7 +86,7 @@ module Term
     # on the color +name+ is returned.
     def color(name, string = nil, &block)
       attribute = Attribute[name] or raise ArgumentError, "unknown attribute #{name.inspect}"
-      result = ''
+      result = +''
       result << "\e[#{attribute.code}m" if Term::ANSIColor.coloring?
       if block_given?
         result << yield.to_s

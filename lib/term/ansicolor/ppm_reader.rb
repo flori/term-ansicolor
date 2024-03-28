@@ -6,7 +6,7 @@ module Term
       def initialize(io, options = {})
         @io      = io
         @options = options
-        @buffer  = ''
+        @buffer  = +''
       end
 
       def reset_io
@@ -29,7 +29,7 @@ module Term
       end
 
       def to_s
-        result = ''
+        result = +''
         each_row do |row|
           last_pixel = nil
           for pixel in row
