@@ -88,3 +88,5 @@ print [
     uncolored { "not red anymore".red },
     uncolored("not red anymore".red)
   ].map { |x| x + "\n" } * ''
+
+puts "Use the " + "Source".hyperlink("https://github.com/flori/term-ansicolor") + ", Luke!"

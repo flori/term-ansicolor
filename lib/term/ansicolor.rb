@@ -15,8 +15,9 @@ module Term
     require 'term/ansicolor/attribute/intense_color8'
     require 'term/ansicolor/attribute/color256'
     require 'term/ansicolor/movement'
-
     include Term::ANSIColor::Movement
+    require 'term/ansicolor/hyperlink'
+    include Term::ANSIColor::Hyperlink
 
     # :stopdoc:
     ATTRIBUTE_NAMES = Attribute.named_attributes.map(&:name)
@@ -95,7 +96,7 @@ module Term
       elsif respond_to?(:to_str)
         result << to_str
       else
-        return result #only switch on
+        return result # only switch on
       end
       result << "\e[0m" if Term::ANSIColor.coloring?
       result.extend(Term::ANSIColor)
