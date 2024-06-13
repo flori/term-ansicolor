@@ -9,7 +9,6 @@ module Term
         Attribute.set :faint,         2
         Attribute.set :italic,        3 # not widely implemented
         Attribute.set :underline,     4
-        Attribute.set :underscore,    4 # synonym for :underline
         Attribute.set :blink,         5
         Attribute.set :rapid_blink,   6 # not widely implemented
         Attribute.set :reverse,       7 # String#reverse already used in String
