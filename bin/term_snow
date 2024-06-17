@@ -9,23 +9,23 @@ class SnowFlake
   extend Term::ANSIColor
 
   def initialize(x, y, shape: %w[ ❄ ❅ ❆ • • · · . . ])
-     @x, @y, @shape = x, y, Array(shape).sample
-     @shape.size != 1 and raise ArgumentError, "#@shape needs to be a character"
-   end
+    @x, @y, @shape = x, y, Array(shape).sample
+    @shape.size != 1 and raise ArgumentError, "#@shape needs to be a character"
+  end
 
-   attr_accessor :x
+  attr_accessor :x
 
-   attr_accessor :y
+  attr_accessor :y
 
-   attr_accessor :shape
+  attr_accessor :shape
 
-   def to_s
-     move_to(y, x) { white on_black @shape }
-   end
+  def to_s
+    move_to(y, x) { white on_black @shape }
+  end
 end
 
-opts = go 'n:s:'
-new_snowflakes  = (opts[?n] || 3).to_i
+opts           = go 'n:s:'
+new_snowflakes = (opts[?n] || 3).to_i
 sleep_duration = (opts[?s] || 0.2).to_f
 
 flakes = []
@@ -51,7 +51,7 @@ loop do
         sf.x = SnowFlake.terminal_columns
       end
     else
-      sf.x == 1
+      sf.x += 1
       if sf.x > SnowFlake.terminal_columns
         sf.x = 1
       end
@@ -64,7 +64,7 @@ loop do
     flakes << SnowFlake.new(rand(1..SnowFlake.terminal_columns), 1)
   end
 
-  print *flakes
+  print(*flakes)
 
   sleep sleep_duration
 rescue Interrupt
