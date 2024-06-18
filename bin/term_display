@@ -65,13 +65,14 @@ Options are
   -a ASPECT       x:y aspect, defaults to 2.2
   -C COLS         number of columns for rendering with aspect, defaults to max
   -R ROWS         number of rows for rendering with aspect, defaults to max - 1
+  -t              use true colors
   -h              this help
 
 EOT
   exit rc
 end
 
-opts = go 'hm:g:s:a:C:R:'
+opts = go 'hm:g:s:a:C:R:t'
 opts['h'] and usage
 filename = ARGV.shift or usage 1
 metric   = Term::ANSIColor::RGBColorMetrics.metric(opts['m'] || 'CIELab')
@@ -84,8 +85,9 @@ opts['R'] ||= [ Tins::Terminal.rows - 1, 0 ].max
 file = provide_ppm_file(filename, opts)
 ppm = Term::ANSIColor::PPMReader.new(
   file,
-  :metric => metric,
-  :gray   => gray
+  metric:        metric,
+  gray:          gray,
+  true_coloring: opts[?t]
 )
 
 puts ppm

@@ -30,15 +30,28 @@ module Term
         end
       end
 
-      def self.[](name)
-        case
-        when self === name                              then name
-        when Array === name                             then nearest_rgb_color name
-        when name.respond_to?(:to_rgb_triple)           then nearest_rgb_color(name.to_rgb_triple.to_a)
-        when name.to_s =~ /\A(on_)?(\d+)\z/             then get "#$1color#$2"
-        when name.to_s =~ /\A#([0-9a-f]{3}){1,2}\z/i    then nearest_rgb_color name
-        when name.to_s =~ /\Aon_#([0-9a-f]{3}){1,2}\z/i then nearest_rgb_on_color name
-        else                                            get name
+      def self.[](name, true_coloring: false)
+        true_coloring ||= Term::ANSIColor.true_coloring?
+        if true_coloring
+          case
+          when self === name                              then name
+          when Array === name                             then true_color name
+          when name.respond_to?(:to_rgb_triple)           then true_color(name.to_rgb_triple.to_a)
+          when name.to_s =~ /\A(on_)?(\d+)\z/             then get "#$1color#$2"
+          when name.to_s =~ /\A#([0-9a-f]{3}){1,2}\z/i    then true_color name
+          when name.to_s =~ /\Aon_#([0-9a-f]{3}){1,2}\z/i then on_true_color name
+          else                                            get name
+          end
+        else
+          case
+          when self === name                              then name
+          when Array === name                             then nearest_rgb_color name
+          when name.respond_to?(:to_rgb_triple)           then nearest_rgb_color(name.to_rgb_triple.to_a)
+          when name.to_s =~ /\A(on_)?(\d+)\z/             then get "#$1color#$2"
+          when name.to_s =~ /\A#([0-9a-f]{3}){1,2}\z/i    then nearest_rgb_color name
+          when name.to_s =~ /\Aon_#([0-9a-f]{3}){1,2}\z/i then nearest_rgb_on_color name
+          else                                            get name
+          end
         end
       end
 
@@ -70,10 +83,24 @@ module Term
         colors.select(&:background?).min_by { |c| c.distance_to(rgb, options) }
       end
 
+      def self.true_color(color, options = {})
+        rgb = RGBTriple[color]
+        new(:true, "", { true_color: rgb, background: false })
+      end
+
+      def self.on_true_color(color, options = {})
+        rgb = RGBTriple[color]
+        new(:on_true, "", { true_color: rgb, background: true })
+      end
+
       def initialize(name, code, options = {})
-        @name = name.to_sym
-        @code = code.to_s
-        if html = options[:html]
+        @name       = name.to_sym
+        @background = @name.start_with?('on_')
+        @code       = code.to_s
+        if rgb = options[:true_color]
+          @true_color = true
+          @rgb = rgb
+        elsif html = options[:html]
           @rgb = RGBTriple.from_html(html)
         elsif !options.empty?
           @rgb = RGBTriple.from_hash(options)
@@ -85,7 +112,9 @@ module Term
       attr_reader :name
 
       def code
-        if rgb_color?
+        if true_color?
+          background? ? "48;2;#{@rgb.to_a * ?;}" : "38;2;#{@rgb.to_a * ?;}"
+        elsif rgb_color?
           background? ? "48;5;#{@code}" : "38;5;#{@code}"
         else
           @code
@@ -97,13 +126,19 @@ module Term
       end
 
       def background?
-        @name.to_s.start_with?('on_')
+        !!@background
       end
+
+      attr_writer :background
 
       attr_reader :rgb
 
       def rgb_color?
-        !!@rgb
+        !!@rgb && !@true_color
+      end
+
+      def true_color?
+        !!(@rgb && @true_color)
       end
 
       def gray?
@@ -127,11 +162,16 @@ module Term
 
       def gradient_to(other, options = {})
         if our_rgb = to_rgb_triple and
-          other.respond_to?(:to_rgb_triple) and
-          other_rgb = other.to_rgb_triple
-        then
+            other.respond_to?(:to_rgb_triple) and
+            other_rgb = other.to_rgb_triple
+          then
+          true_coloring = options[:true_coloring] || Term::ANSIColor.true_coloring?
           our_rgb.gradient_to(other_rgb, options).map do |rgb_triple|
-            self.class.nearest_rgb_color(rgb_triple, options)
+            if true_coloring
+              self.class.true_color(rgb_triple, options)
+            else
+              self.class.nearest_rgb_color(rgb_triple, options)
+            end
           end
         else
           []

@@ -4,9 +4,10 @@ module Term
       include Term::ANSIColor
 
       def initialize(io, options = {})
-        @io      = io
-        @options = options
-        @buffer  = ''
+        @io            = io
+        @options       = options
+        @buffer        = ''
+        @true_coloring = options[:true_coloring]
       end
 
       def reset_io
@@ -34,7 +35,11 @@ module Term
           last_pixel = nil
           for pixel in row
             if pixel != last_pixel
-              color = Attribute.nearest_rgb_color(pixel, @options)
+              color = if @true_coloring
+                        Attribute.true_color(pixel, @options)
+                      else
+                        Attribute.nearest_rgb_color(pixel, @options)
+                      end
               result << on_color(color)
               last_pixel = pixel
             end

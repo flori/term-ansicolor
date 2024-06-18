@@ -15,6 +15,32 @@ def print_color(c)
   print ("%3u #{color.rgb.html} " % c).on_color(color.name).color(text.name)
 end
 
+if Term::ANSIColor.true_coloring = ENV['COLORTERM'] =~ /\A(truecolor|24bit)\z/
+
+  puts "True colors".bold, ""
+  step = 36
+  (0..255).step(step) do |g|
+    (0..255).step(step) do |r|
+      (0..255).step(step) do |b|
+        print Term::ANSIColor.on_color(Term::ANSIColor::RGBTriple.new(r, g, b)) { ' ' }
+      end
+      print ' '
+    end
+    puts
+  end
+
+  puts
+  (0..255).step(4) do |g|
+    print Term::ANSIColor.on_color(Term::ANSIColor::RGBTriple.new(g, g, g)) { ' ' }
+  end
+  puts
+  puts
+
+end
+
+Term::ANSIColor.true_coloring = false
+
+puts "256 colors".bold, ""
 for c in 0..3
   print_color c
 end

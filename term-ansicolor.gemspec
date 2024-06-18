@@ -1,9 +1,9 @@
 # -*- encoding: utf-8 -*-
-# stub: term-ansicolor 1.8.0 ruby lib
+# stub: term-ansicolor 1.9.0 ruby lib
 
 Gem::Specification.new do |s|
   s.name = "term-ansicolor".freeze
-  s.version = "1.8.0".freeze
+  s.version = "1.9.0".freeze
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.homepage = "https://github.com/flori/term-ansicolor".freeze
   s.licenses = ["Apache-2.0".freeze]
   s.rdoc_options = ["--title".freeze, "Term-ansicolor - Ruby library that colors strings using ANSI escape sequences".freeze, "--main".freeze, "README.md".freeze]
-  s.rubygems_version = "3.5.13".freeze
+  s.rubygems_version = "3.5.3".freeze
   s.summary = "Ruby library that colors strings using ANSI escape sequences".freeze
   s.test_files = ["tests/ansicolor_test.rb".freeze, "tests/attribute_test.rb".freeze, "tests/hsl_triple_test.rb".freeze, "tests/hyperlink_test.rb".freeze, "tests/ppm_reader_test.rb".freeze, "tests/rgb_color_metrics_test.rb".freeze, "tests/rgb_triple_test.rb".freeze, "tests/test_helper.rb".freeze]
 

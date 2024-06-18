@@ -35,6 +35,7 @@ module Term
         !String.instance_methods(false).map(&:to_sym).include?(:clear)
       end
     end
+
     # Returns true, if the coloring function of this module
     # is switched on, false otherwise.
     def self.coloring?
@@ -43,11 +44,25 @@ module Term
 
     # Turns the coloring on or off globally, so you can easily do
     # this for example:
-    #  Term::ANSIColor::coloring = STDOUT.isatty
+    #   Term::ANSIColor::coloring = STDOUT.isatty
     def self.coloring=(val)
-      @coloring = val
+      @coloring = !!val
     end
     self.coloring = true
+
+    # Returns true, if the tue coloring mode of this module is switched on,
+    # false otherwise.
+    def self.true_coloring?
+      @true_coloring
+    end
+
+    # Turns the true coloring mode on or off globally, that will display 24-bit
+    # colors if your terminal supports it:
+    #  Term::ANSIColor::true_coloring = ENV['COLORTERM'] =~ /\A(truecolor|24bit)\z/
+    def self.true_coloring=(val)
+      @true_coloring = !!val
+    end
+    self.true_coloring = false
 
     def self.create_color_method(color_name, color_value)
       module_eval <<-EOT
@@ -64,10 +79,10 @@ module Term
 
     # Regular expression that is used to scan for ANSI-Attributes while
     # uncoloring strings.
-    COLORED_REGEXP = /\e\[(?:(?:[349]|10)[0-7]|[0-9]|[34]8;5;\d{1,3})?m/
+    COLORED_REGEXP = /\e\[(?:(?:[349]|10)[0-7]|[0-9]|[34]8;(5;\d{1,3}|2;\d{1,3}(;\d{1,3}){2}))?m/
 
-    # Returns an uncolored version of the string, that is all
-    # ANSI-Attributes are stripped from the string.
+    # Returns an uncolored version of the string, that is all ANSI-Attributes
+    # are stripped from the string.
     def uncolor(string = nil) # :yields:
       if block_given?
         yield.to_str.gsub(COLORED_REGEXP, '')
@@ -104,7 +119,9 @@ module Term
 
     def on_color(name, string = nil, &block)
       attribute = Attribute[name] or raise ArgumentError, "unknown attribute #{name.inspect}"
-      color("on_#{attribute.name}", string, &block)
+      attribute = attribute.dup
+      attribute.background = true
+      color(attribute, string, &block)
     end
 
     class << self

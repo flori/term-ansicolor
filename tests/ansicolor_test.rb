@@ -157,4 +157,20 @@ class ANSIColorTest < Test::Unit::TestCase
     string = Color.red(string)
     assert_kind_of Term::ANSIColor, 'new'
   end
+
+  def test_coloring
+    assert Term::ANSIColor.coloring?
+    Term::ANSIColor.coloring = false
+    assert_false Term::ANSIColor.coloring?
+  ensure
+    Term::ANSIColor.coloring = true
+  end
+
+  def test_true_coloring
+    assert_false Term::ANSIColor.true_coloring?
+    Term::ANSIColor.true_coloring = true
+    assert Term::ANSIColor.true_coloring?
+  ensure
+    Term::ANSIColor.true_coloring = false
+  end
 end

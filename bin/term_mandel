@@ -15,16 +15,12 @@ def draw_set(rx, ry)
   sx = (rx.end - rx.begin).abs / @width
   sy = (ry.end - ry.begin).abs / @height
 
-  ac = Term::ANSIColor
-  color =
-    ac::Attribute[ color_random ].gradient_to(ac::Attribute[ color_random ], :steps => 16) +
-    ac::Attribute[ color_random ].gradient_to(ac::Attribute[ color_random ], :steps => 16) +
-    ac::Attribute[ color_random ].gradient_to(ac::Attribute[ color_random ], :steps => 16) +
-    ac::Attribute[ color_random ].gradient_to(ac::Attribute[ color_random ], :steps => 16) +
-    ac::Attribute[ color_random ].gradient_to(ac::Attribute[ color_random ], :steps => 16) +
-    ac::Attribute[ color_random ].gradient_to(ac::Attribute[ color_random ], :steps => 16) +
-    ac::Attribute[ color_random ].gradient_to(ac::Attribute[ color_random ], :steps => 16) +
-    ac::Attribute[ color_random ].gradient_to(ac::Attribute['#000'], :steps => 16)
+  ac    = Term::ANSIColor
+  steps = 16
+  color = (5.times.map { color_random } + [ 0, 0, 0 ]).map { ac::Attribute[_1] }
+  color = color[1..-1].inject(color[0,1]) { |c, x|
+    c + c.last.gradient_to(x, steps:)
+  }
   iters = color.size - 2
 
   text = ''
@@ -44,9 +40,11 @@ def draw_set(rx, ry)
   puts text
 end
 
-opts = go 'x:y:'
+opts = go 'x:y'
 
-rx = opts['x'].full? { |r| Range.new(*(r.split('..', 2).map(&:to_f))) } || (-2.0..1.0)
-ry = opts['y'].full? { |r| Range.new(*(r.split('..', 2).map(&:to_f))) } || (-1.0..1.0)
+Term::ANSIColor.true_coloring = ENV['COLORTERM'] =~ /\A(truecolor|24bit)\z/
+
+rx = opts[?x].full? { |r| Range.new(*(r.split('..', 2).map(&:to_f))) } || (-2.0..1.0)
+ry = opts[?y].full? { |r| Range.new(*(r.split('..', 2).map(&:to_f))) } || (-1.0..1.0)
 
 draw_set rx, ry

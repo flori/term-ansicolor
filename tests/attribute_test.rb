@@ -70,4 +70,43 @@ class AttributeTest < Test::Unit::TestCase
     assert_equal [ :color49, :color43, :color79, :color73, :color108,
       :color247, :color138, :color168, :color204 ], g2.map(&:name)
   end
+
+  def test_true_color
+    pinkish = Attribute['#f050a0', true_coloring: true]
+    assert_equal [ 240, 80, 160 ], pinkish.to_rgb_triple.to_a
+    on_pinkish = Attribute['on_#f050a0', true_coloring: true]
+    assert_equal [ 240, 80, 160 ], on_pinkish.to_rgb_triple.to_a
+    red = Attribute['9', true_coloring: true]
+    assert_equal [ 255, 0, 0 ], red.to_rgb_triple.to_a
+    red = Attribute['red', true_coloring: true]
+    assert_equal :red, red.name
+    pinkish_pinkish = Attribute[pinkish, true_coloring: true]
+    assert_equal pinkish, pinkish_pinkish
+    pinkish_pinkish = Attribute[pinkish.to_rgb_triple, true_coloring: true]
+    assert_equal pinkish.to_rgb_triple, pinkish_pinkish.to_rgb_triple
+    pinkish_pinkish = Attribute[pinkish.to_rgb_triple.to_a, true_coloring: true]
+    assert_equal pinkish.to_rgb_triple, pinkish_pinkish.to_rgb_triple
+  end
+
+  def test_true_color_gradient
+    g0 = Attribute[:blink].gradient_to Attribute['#30ffaa']
+    assert_equal [], g0
+    g1 = Attribute['#30ffaa'].gradient_to(
+      Attribute['#ff507f'],
+      :steps => 9,
+      true_coloring: true
+    )
+    assert_equal %w[
+      #00ffaf #1febaa #3ed7a5 #5dc3a0 #7caf9b #9b9b96 #ba8791 #d9738c #ff5f87
+    ], g1.map { _1.rgb.html }
+    g2 = Attribute['#30ffaa'].gradient_to(
+      Attribute['#ff507f'],
+      :steps  => 9,
+      true_coloring: true,
+      :metric => RGBColorMetrics::Euclidean
+    )
+    assert_equal %w[
+      #00ffaf #1febaa #3ed7a5 #5dc3a0 #7caf9b #9b9b96 #ba8791 #d9738c #ff5f87
+    ], g2.map { _1.rgb.html }
+  end
 end

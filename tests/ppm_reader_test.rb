@@ -28,6 +28,14 @@ class PPMReaderTest < Test::Unit::TestCase
     end
   end
 
+  def test_rendering_ppm_with_true_colors
+    File.open(example_path('lambda-red.ppm')) do |ppm6|
+      ppm_reader = PPMReader.new(ppm6, :true_coloring => true)
+      assert_equal '5faa2b046cc3e030f86588e472683834',
+        Digest::MD5.hexdigest(ppm_reader.to_s)
+    end
+  end
+
   def test_to_a
     File.open(example_path('lambda-red.ppm')) do |ppm6|
       ppm_reader = PPMReader.new(ppm6, :gray => false)
