@@ -4,5 +4,6 @@
 .rvmrc
 Gemfile.lock
 coverage
+errors.lst
 pkg
 tags
