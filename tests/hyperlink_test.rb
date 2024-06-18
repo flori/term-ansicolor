@@ -1,3 +1,5 @@
+require 'test_helper'
+
 class HyperlinkTest < Test::Unit::TestCase
   include Term::ANSIColor
 
@@ -49,6 +51,8 @@ class HyperlinkTest < Test::Unit::TestCase
   end
 
   def test_with_stringy_self
-    assert_equal "\e]8;;#@link\e\\foo\e]8;;\e\\", "foo".hyperlink(@link)
+    string = 'foo'
+    string.extend Term::ANSIColor
+    assert_equal "\e]8;;#@link\e\\foo\e]8;;\e\\", string.hyperlink(@link)
   end
 end
