@@ -13,7 +13,7 @@ class HSLTripleTest < Test::Unit::TestCase
 
   def test_hsl_cast
     assert_equal '#85e085', HSLTriple[ @pastel_green_hsl ].html
-    assert_equal '#85e085', HSLTriple[ :hue => 120, :saturation => 59.4, :lightness => 70 ].html
+    assert_equal '#85e085', HSLTriple[ hue: 120, saturation: 59.4, lightness: 70 ].html
     assert_equal '#11ddff', HSLTriple[ '#1df' ].html
     assert_equal '#8000ff', HSLTriple[ 'rgb(128,0,255)' ].html
     assert_equal '#85e085', HSLTriple[ 'hsl(120.0,59.4%,70.0%)' ].html

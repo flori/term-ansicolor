@@ -32,7 +32,7 @@ class AttributeTest < Test::Unit::TestCase
     assert_in_delta 250.954, Attribute.get(:color0).distance_to(color), 1e-3
     color = Attribute.nearest_rgb_color('#0f0')
     assert_in_delta 255, Attribute.get(:color0).distance_to(color,
-      :metric => RGBColorMetrics::Euclidean), 1e-3
+      metric: RGBColorMetrics::Euclidean), 1e-3
     assert_equal 1 / 0.0, Attribute.get(:color0).distance_to(nil)
   end
 
@@ -40,14 +40,14 @@ class AttributeTest < Test::Unit::TestCase
     assert_equal Attribute.get(:color0).rgb, Attribute.nearest_rgb_color('#000').rgb
     assert_equal Attribute.get(:color15).rgb, Attribute.nearest_rgb_color('#ffffff').rgb
     assert_equal :color248, Attribute.nearest_rgb_color('#aaa').name
-    assert_equal :color109, Attribute.nearest_rgb_color('#aaa', :gray => false).name
+    assert_equal :color109, Attribute.nearest_rgb_color('#aaa', gray: false).name
   end
 
   def test_nearest_rgb_on_color
     assert_equal Attribute.get(:on_color0).rgb, Attribute.nearest_rgb_on_color('#000').rgb
     assert_equal Attribute.get(:on_color15).rgb, Attribute.nearest_rgb_on_color('#ffffff').rgb
     assert_equal :on_color248, Attribute.nearest_rgb_on_color('#aaa').name
-    assert_equal :on_color109, Attribute.nearest_rgb_on_color('#aaa', :gray => false).name
+    assert_equal :on_color109, Attribute.nearest_rgb_on_color('#aaa', gray: false).name
   end
 
   def test_apply
@@ -59,13 +59,13 @@ class AttributeTest < Test::Unit::TestCase
   def test_gradient
     g0 = Attribute[:blink].gradient_to Attribute['#30ffaa']
     assert_equal [], g0
-    g1 = Attribute['#30ffaa'].gradient_to(Attribute['#ff507f'], :steps => 9)
+    g1 = Attribute['#30ffaa'].gradient_to(Attribute['#ff507f'], steps: 9)
     assert_equal [ :color49, :color49, :color43, :color79, :color108,
       :color247, :color138, :color168, :color204 ], g1.map(&:name)
     g2 = Attribute['#30ffaa'].gradient_to(
       Attribute['#ff507f'],
-      :steps  => 9,
-      :metric => RGBColorMetrics::Euclidean
+      steps: 9,
+      metric: RGBColorMetrics::Euclidean
     )
     assert_equal [ :color49, :color43, :color79, :color73, :color108,
       :color247, :color138, :color168, :color204 ], g2.map(&:name)
@@ -93,7 +93,7 @@ class AttributeTest < Test::Unit::TestCase
     assert_equal [], g0
     g1 = Attribute['#30ffaa'].gradient_to(
       Attribute['#ff507f'],
-      :steps => 9,
+      steps: 9,
       true_coloring: true
     )
     assert_equal %w[
@@ -101,9 +101,9 @@ class AttributeTest < Test::Unit::TestCase
     ], g1.map { _1.rgb.html }
     g2 = Attribute['#30ffaa'].gradient_to(
       Attribute['#ff507f'],
-      :steps  => 9,
+      steps: 9,
       true_coloring: true,
-      :metric => RGBColorMetrics::Euclidean
+      metric: RGBColorMetrics::Euclidean
     )
     assert_equal %w[
       #00ffaf #1febaa #3ed7a5 #5dc3a0 #7caf9b #9b9b96 #ba8791 #d9738c #ff5f87

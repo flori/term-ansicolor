@@ -95,8 +95,9 @@ module Term
 
       def initialize(name, code, options = {})
         @name       = name.to_sym
-        @background = @name.start_with?('on_')
+        @background = !!options[:background]
         @code       = code.to_s
+        @true_color = false
         if rgb = options[:true_color]
           @true_color = true
           @rgb = rgb
@@ -122,7 +123,7 @@ module Term
       end
 
       def apply(string = nil, &block)
-        ::Term::ANSIColor.color(self, string, &block)
+        ::Term::ANSIColor.apply_attribute(self, string, &block)
       end
 
       def background?

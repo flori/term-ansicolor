@@ -66,8 +66,8 @@ module Term
 
     def self.create_color_method(color_name, color_value)
       module_eval <<-EOT
-        def #{color_name}(string = nil, &block)
-          color(:#{color_name}, string, &block)
+        def #{color_name}(string = nil, **options, &block)
+          apply_attribute(:#{color_name}, string, **options, &block)
         end
       EOT
       self
@@ -79,7 +79,7 @@ module Term
 
     # Regular expression that is used to scan for ANSI-Attributes while
     # uncoloring strings.
-    COLORED_REGEXP = /\e\[(?:(?:[349]|10)[0-7]|[0-9]|[34]8;(5;\d{1,3}|2;\d{1,3}(;\d{1,3}){2}))?m/
+    COLORED_REGEXP = /\e\[(?:(?:[349]|10)[0-7]|[0-9]|[34]8;(5;\d{1,3}|2;\d{1,3}(;\d{1,3}){2})|4:\d|53)?m/
 
     # Returns an uncolored version of the string, that is all ANSI-Attributes
     # are stripped from the string.
@@ -97,11 +97,9 @@ module Term
 
     alias uncolored uncolor
 
-    # Return +string+ or the result string of the given +block+ colored with
-    # color +name+. If string isn't a string only the escape sequence to switch
-    # on the color +name+ is returned.
-    def color(name, string = nil, &block)
-      attribute = Attribute[name] or raise ArgumentError, "unknown attribute #{name.inspect}"
+    def apply_attribute(name, string = nil, &block)
+      attribute = Attribute[name] or
+        raise ArgumentError, "unknown attribute #{name.inspect}"
       result = ''
       result << "\e[#{attribute.code}m" if Term::ANSIColor.coloring?
       if block_given?
@@ -117,11 +115,22 @@ module Term
       result.extend(Term::ANSIColor)
     end
 
+    # Return +string+ or the result string of the given +block+ colored with
+    # color +name+. If string isn't a string only the escape sequence to switch
+    # on the color +name+ is returned.
+    def color(name, string = nil, &block)
+      apply_attribute(name, string, &block)
+    end
+
+    # Return +string+ or the result string of the given +block+ with a
+    # background colored with color +name+. If string isn't a string only the
+    # escape sequence to switch on the color +name+ is returned.
     def on_color(name, string = nil, &block)
-      attribute = Attribute[name] or raise ArgumentError, "unknown attribute #{name.inspect}"
+      attribute = Attribute[name] or
+        raise ArgumentError, "unknown attribute #{name.inspect}"
       attribute = attribute.dup
       attribute.background = true
-      color(attribute, string, &block)
+      apply_attribute(attribute, string, &block)
     end
 
     class << self
