@@ -21,6 +21,7 @@ GemHadar do
   executables.merge Dir['bin/*'].map { |x| File.basename(x) }
 
   dependency             'tins', '~>1.0'
+  dependency             'mize'
   development_dependency 'simplecov'
   development_dependency 'test-unit'
   development_dependency 'utils'

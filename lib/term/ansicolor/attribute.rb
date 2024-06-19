@@ -3,10 +3,16 @@ module Term
     class Attribute
       @__store__ = {}
 
-      def self.set(name, code, options = {})
+      def self.set(name, code, **options)
         name = name.to_sym
         result = @__store__[name] = new(name, code, options)
-        @rgb_colors = nil
+        unless options[:skip_definition]
+          ::Term::ANSIColor.class_eval do
+            define_method(name) do |string = nil, &block|
+              apply_attribute(name, string, &block)
+            end
+          end
+        end
         result
       end
 
@@ -44,7 +50,7 @@ module Term
       end
 
       def self.rgb_colors(options = {}, &block)
-        colors = @rgb_colors ||= attributes.select(&:rgb_color?)
+        colors = attributes.select(&:rgb_color?)
         if options.key?(:gray) && !options[:gray]
           colors = colors.reject(&:gray?)
         end
@@ -85,9 +91,12 @@ module Term
         if rgb = options[:true_color]
           @true_color = true
           @rgb = rgb
+        elsif rgb = options[:color8]
+          @color8 = true
+          @rgb = RGBTriple.from_html(rgb)
         elsif html = options[:html]
           @rgb = RGBTriple.from_html(html)
-        elsif !options.empty?
+        elsif options.slice(:red, :green, :blue).size == 3
           @rgb = RGBTriple.from_hash(options)
         else
           @rgb = nil # prevent instance variable not initialized warnings
@@ -101,6 +110,8 @@ module Term
           background? ? "48;2;#{@rgb.to_a * ?;}" : "38;2;#{@rgb.to_a * ?;}"
         elsif rgb_color?
           background? ? "48;5;#{@code}" : "38;5;#{@code}"
+        elsif color8?
+          background? ? (@code.to_i + 10).to_s : @code
         else
           @code
         end
@@ -114,12 +125,16 @@ module Term
         !!@background
       end
 
+      def color8?
+        !!@color8
+      end
+
       attr_writer :background
 
       attr_reader :rgb
 
       def rgb_color?
-        !!@rgb && !@true_color
+        !!@rgb && !@true_color && !@color8
       end
 
       def true_color?

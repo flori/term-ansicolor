@@ -103,9 +103,22 @@ class ANSIColorTest < Test::Unit::TestCase
 
   def test_attributes
     foo = 'foo'
-    for a in Term::ANSIColor.attributes
+    attributes = %i[
+      clear reset bold dark faint italic underline underscore
+      blink rapid_blink reverse negative concealed conceal strikethrough black
+      red green yellow blue magenta cyan white on_black on_red on_green on_yellow
+      on_blue on_magenta on_cyan on_white intense_black bright_black intense_red
+      bright_red intense_green bright_green intense_yellow bright_yellow
+      intense_blue bright_blue intense_magenta bright_magenta intense_cyan
+      bright_cyan intense_white bright_white on_intense_black on_bright_black
+      on_intense_red on_bright_red on_intense_green on_bright_green
+      on_intense_yellow on_bright_yellow on_intense_blue on_bright_blue
+      on_intense_magenta on_bright_magenta on_intense_cyan on_bright_cyan
+      on_intense_white on_bright_white
+    ]
+    for a in attributes
       # skip :clear and :reverse b/c Ruby implements them on string
-      if a != :clear && a != :reverse || Term::ANSIColor.support?(:clear)
+      if a != :clear && a != :reverse
         refute_equal foo, foo_colored = foo.__send__(a)
         assert_equal foo, foo_colored.uncolor
       end
@@ -119,6 +132,36 @@ class ANSIColorTest < Test::Unit::TestCase
       assert_equal foo, uncolor { foo_colored }
     end
     assert_equal Term::ANSIColor.attributes, 'foo'.attributes
+  end
+
+  def test_underline
+    foo = 'foo'
+    assert_equal "\e[4mfoo\e[0m", Term::ANSIColor.underline { foo }
+    assert_equal "\e[4m\e[58;2;255;135;95mfoo\e[0m", Term::ANSIColor.underline(color: '#ff8040') { foo }
+  end
+
+  def test_underline_double
+    foo = 'foo'
+    assert_equal "\e[4:2mfoo\e[0m", Term::ANSIColor.underline(type: :double) { foo }
+    assert_equal "\e[4:2m\e[58;2;255;135;95mfoo\e[0m", Term::ANSIColor.underline(type: :double, color: '#ff8040') { foo }
+  end
+
+  def test_underline_curly
+    foo = 'foo'
+    assert_equal "\e[4:3mfoo\e[0m", Term::ANSIColor.underline(type: :curly) { foo }
+    assert_equal "\e[4:3m\e[58;2;255;135;95mfoo\e[0m", Term::ANSIColor.underline(type: :curly, color: '#ff8040') { foo }
+  end
+
+  def test_underline_dotted
+    foo = 'foo'
+    assert_equal "\e[4:4mfoo\e[0m", Term::ANSIColor.underline(type: :dotted) { foo }
+    assert_equal "\e[4:4m\e[58;2;255;135;95mfoo\e[0m", Term::ANSIColor.underline(type: :dotted, color: '#ff8040') { foo }
+  end
+
+  def test_underline_dashed
+    foo = 'foo'
+    assert_equal "\e[4:5mfoo\e[0m", Term::ANSIColor.underline(type: :dashed) { foo }
+    assert_equal "\e[4:5m\e[58;2;255;135;95mfoo\e[0m", Term::ANSIColor.underline(type: :dashed, color: '#ff8040') { foo }
   end
 
   def test_move_to

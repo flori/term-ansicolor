@@ -76,7 +76,7 @@ print "clear".clear, "reset".reset, "bold".bold, "dark".dark,
 
 symbols = Term::ANSIColor::attributes
 print red { bold { "All supported attributes = " } },
-  symbols.map { |s| __send__(s, s.inspect) } * ', ', "\n\n"
+  symbols.map { |s| __send__(s, s.inspect) } * ",\n", "\n\n"
 
 print "Send symbols to strings:".send(:red).send(:bold), "\n"
 print symbols[12, 8].map { |c| c.to_s.send(c) } * '', "\n\n"
