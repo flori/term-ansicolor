@@ -91,8 +91,8 @@ module Term
         if rgb = options[:true_color]
           @true_color = true
           @rgb = rgb
-        elsif rgb = options[:color8]
-          @color8 = true
+        elsif rgb = options[:direct]
+          @direct = true
           @rgb = RGBTriple.from_html(rgb)
         elsif html = options[:html]
           @rgb = RGBTriple.from_html(html)
@@ -110,7 +110,7 @@ module Term
           background? ? "48;2;#{@rgb.to_a * ?;}" : "38;2;#{@rgb.to_a * ?;}"
         elsif rgb_color?
           background? ? "48;5;#{@code}" : "38;5;#{@code}"
-        elsif color8?
+        elsif direct?
           background? ? (@code.to_i + 10).to_s : @code
         else
           @code
@@ -125,8 +125,8 @@ module Term
         !!@background
       end
 
-      def color8?
-        !!@color8
+      def direct?
+        !!@direct
       end
 
       attr_writer :background
@@ -134,7 +134,7 @@ module Term
       attr_reader :rgb
 
       def rgb_color?
-        !!@rgb && !@true_color && !@color8
+        !!@rgb && !@true_color && !@direct
       end
 
       def true_color?

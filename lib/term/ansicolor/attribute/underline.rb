@@ -17,7 +17,7 @@ module Term
           if color
             a          = Term::ANSIColor::Attribute[color]
             color_code =
-              if a.true_color? || a.rgb_color? || a.color8?
+              if a.true_color? || a.rgb_color? || a.direct?
                 color_code = "\e[58;2;#{a.rgb.to_a * ?;}"
               else
                 raise ArgumentError, "invalid color #{a.name.inspect}"

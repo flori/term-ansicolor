@@ -1,9 +1,9 @@
 # -*- encoding: utf-8 -*-
-# stub: term-ansicolor 1.10.0 ruby lib
+# stub: term-ansicolor 1.10.1 ruby lib
 
 Gem::Specification.new do |s|
   s.name = "term-ansicolor".freeze
-  s.version = "1.10.0".freeze
+  s.version = "1.10.1".freeze
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
