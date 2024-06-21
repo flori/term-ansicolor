@@ -3,31 +3,15 @@ module Term
     class Attribute
       @__store__ = {}
 
-      if RUBY_VERSION < '1.9'
-        @__order__ = []
+      def self.set(name, code, options = {})
+        name = name.to_sym
+        result = @__store__[name] = new(name, code, options)
+        @rgb_colors = nil
+        result
+      end
 
-        def self.set(name, code, options = {})
-          name = name.to_sym
-          result = @__store__[name] = new(name, code, options)
-          @__order__ << name
-          @rgb_colors = nil
-          result
-        end
-
-        def self.attributes(&block)
-          @__order__.map { |name| @__store__[name] }
-        end
-      else
-        def self.set(name, code, options = {})
-          name = name.to_sym
-          result = @__store__[name] = new(name, code, options)
-          @rgb_colors = nil
-          result
-        end
-
-        def self.attributes(&block)
-          @__store__.each_value(&block)
-        end
+      def self.attributes(&block)
+        @__store__.each_value(&block)
       end
 
       def self.[](name, true_coloring: false)
