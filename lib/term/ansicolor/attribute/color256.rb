@@ -4,7 +4,7 @@ module Term
       class Color256
         Attribute.set :color0, 0, html: '#000000'
         Attribute.set :color1, 1, html: '#800000'
-        Attribute.set :color2, 2, html: '#808000'
+        Attribute.set :color2, 2, html: '#008000'
         Attribute.set :color3, 3, html: '#808000'
         Attribute.set :color4, 4, html: '#000080'
         Attribute.set :color5, 5, html: '#800080'
