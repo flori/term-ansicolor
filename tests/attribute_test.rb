@@ -98,7 +98,7 @@ class AttributeTest < Test::Unit::TestCase
     )
     assert_equal %w[
       #00ffaf #1febaa #3ed7a5 #5dc3a0 #7caf9b #9b9b96 #ba8791 #d9738c #ff5f87
-    ], g1.map { _1.rgb.html }
+    ], g1.map { |c| c.rgb.html }
     g2 = Attribute['#30ffaa'].gradient_to(
       Attribute['#ff507f'],
       steps: 9,
@@ -107,6 +107,6 @@ class AttributeTest < Test::Unit::TestCase
     )
     assert_equal %w[
       #00ffaf #1febaa #3ed7a5 #5dc3a0 #7caf9b #9b9b96 #ba8791 #d9738c #ff5f87
-    ], g2.map { _1.rgb.html }
+    ], g2.map { |c| c.rgb.html }
   end
 end

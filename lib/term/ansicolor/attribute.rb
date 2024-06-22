@@ -87,6 +87,7 @@ module Term
         @name       = name.to_sym
         @background = !!options[:background]
         @code       = code.to_s
+        @direct     = false
         @true_color = false
         if rgb = options[:true_color]
           @true_color = true
