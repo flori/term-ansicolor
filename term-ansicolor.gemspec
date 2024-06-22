@@ -1,14 +1,14 @@
 # -*- encoding: utf-8 -*-
-# stub: term-ansicolor 1.10.1 ruby lib
+# stub: term-ansicolor 1.10.2 ruby lib
 
 Gem::Specification.new do |s|
   s.name = "term-ansicolor".freeze
-  s.version = "1.10.1".freeze
+  s.version = "1.10.2".freeze
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
   s.authors = ["Florian Frank".freeze]
-  s.date = "2024-06-21"
+  s.date = "2024-06-22"
   s.description = "This library uses ANSI escape sequences to control the attributes of terminal output".freeze
   s.email = "flori@ping.de".freeze
   s.executables = ["term_cdiff".freeze, "term_colortab".freeze, "term_decolor".freeze, "term_display".freeze, "term_mandel".freeze, "term_snow".freeze]
