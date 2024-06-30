@@ -1,4 +1,5 @@
 require 'tins/xt/full'
+require 'tins/xt/ask_and_send'
 require 'mize'
 
 module Term

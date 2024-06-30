@@ -43,7 +43,7 @@ class HyperlinkTest < Test::Unit::TestCase
   end
 
   def test_hyperlink_block_arg
-    assert_raise(ArgumentError) { hyperlink(@link, 'bar') { 'baz' } }
+    assert_raises(ArgumentError) { hyperlink(@link, 'bar') { 'baz' } }
     assert_equal(
       "\e]8;;#@link\e\\foo\e]8;;\e\\",
       hyperlink(@link) { 'foo' }

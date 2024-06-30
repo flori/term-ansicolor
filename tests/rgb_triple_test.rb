@@ -96,6 +96,6 @@ class RgbTripleTest < Test::Unit::TestCase
   end
 
   def test_method_missing
-    assert_raise(NoMethodError) { RGBTriple.new(0, 0, 0).foo }
+    assert_raises(NoMethodError) { RGBTriple.new(0, 0, 0).foo }
   end
 end

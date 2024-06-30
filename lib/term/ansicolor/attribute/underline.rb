@@ -15,12 +15,12 @@ module Term
             dashed:  '4:5',
           }.fetch(type) { raise ArgumentError, "invalid line type" }
           if color
-            a          = Term::ANSIColor::Attribute[color]
+            a = Term::ANSIColor::Attribute[color]
             color_code =
-              if a.true_color? || a.rgb_color? || a.direct?
-                color_code = "\e[58;2;#{a.rgb.to_a * ?;}"
+              if rgb = a.ask_and_send(:to_rgb_triple).full?(:to_a)
+                "\e[58;2;#{rgb * ?;}"
               else
-                raise ArgumentError, "invalid color #{a.name.inspect}"
+                raise ArgumentError, "invalid color #{a&.name.inspect}"
               end
             code = "#{code}m#{color_code}"
           end

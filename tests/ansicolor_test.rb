@@ -134,6 +134,14 @@ class ANSIColorTest < Test::Unit::TestCase
     assert_equal Term::ANSIColor.attributes, 'foo'.attributes
   end
 
+  def test_underline_invalid_type
+    assert_raises(ArgumentError) { Term::ANSIColor.underline(type: :nix) { 'foo' } }
+  end
+
+  def test_underline_invalid_color
+    assert_raises(ArgumentError) { Term::ANSIColor.underline(color: :nix) { 'foo' } }
+  end
+
   def test_underline
     foo = 'foo'
     assert_equal "\e[4mfoo\e[0m", Term::ANSIColor.underline { foo }

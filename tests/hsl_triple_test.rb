@@ -80,6 +80,6 @@ class HSLTripleTest < Test::Unit::TestCase
   end
 
   def test_method_missing
-    assert_raise(NoMethodError) { @pastel_green_hsl.foo }
+    assert_raises(NoMethodError) { @pastel_green_hsl.foo }
   end
 end
