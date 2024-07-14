@@ -31,6 +31,9 @@ The following executables are provided with Term::ANSIColor:
 * `term_mandel`: displays the mandelbrot set in the terminal
 * `term_snow`: displays falling snow in the terminal using ANSI movement
   sequences.
+* `term_plasma`: draws a plasma effect on the console, possibly animated and
+  refreshed every `-n seconds`.
+
 
 Additionally the file examples/example.rb in the source/gem-distribution shows
 how this library can be used.

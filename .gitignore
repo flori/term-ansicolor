@@ -4,6 +4,7 @@
 .rvmrc
 Gemfile.lock
 coverage
+cscope.out
 errors.lst
 pkg
 tags

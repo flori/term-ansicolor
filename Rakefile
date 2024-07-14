@@ -15,7 +15,7 @@ GemHadar do
 
   test_dir    'tests'
   ignore      '.*.sw[pon]', 'pkg', 'Gemfile.lock', '.rvmrc', 'coverage',
-    'tags', '.bundle', '.byebug_history', 'errors.lst'
+    'tags', '.bundle', '.byebug_history', 'errors.lst', 'cscope.out'
 
   readme      'README.md'
   executables.merge Dir['bin/*'].map { |x| File.basename(x) }
