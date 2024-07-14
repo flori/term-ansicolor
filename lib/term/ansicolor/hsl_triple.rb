@@ -72,8 +72,8 @@ module Term
 
       def initialize(hue, saturation, lightness)
         @hue        = Float(hue) % 360
-        @saturation = [ [ Float(saturation), 0 ].max, 100 ].min
-        @lightness  = [ [ Float(lightness), 0 ].max, 100 ].min
+        @saturation = Float(saturation).clamp(0, 100)
+        @lightness  = Float(lightness).clamp(0, 100)
       end
 
       attr_reader :hue

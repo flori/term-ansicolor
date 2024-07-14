@@ -59,9 +59,7 @@ module Term
       end
 
       def initialize(red, green, blue)
-        @values = [ red, green, blue ].map { |v|
-          [ [ Integer(v), 0 ].max, 0xff ].min
-        }
+        @values = [ red, green, blue ].map! { |v| v.clamp(0, 0xff) }
       end
 
       def red
