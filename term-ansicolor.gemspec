@@ -1,14 +1,14 @@
 # -*- encoding: utf-8 -*-
-# stub: term-ansicolor 1.10.3 ruby lib
+# stub: term-ansicolor 1.10.4 ruby lib
 
 Gem::Specification.new do |s|
   s.name = "term-ansicolor".freeze
-  s.version = "1.10.3".freeze
+  s.version = "1.10.4".freeze
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
   s.authors = ["Florian Frank".freeze]
-  s.date = "2024-07-14"
+  s.date = "2024-07-15"
   s.description = "This library uses ANSI escape sequences to control the attributes of terminal output".freeze
   s.email = "flori@ping.de".freeze
   s.executables = ["term_cdiff".freeze, "term_colortab".freeze, "term_decolor".freeze, "term_display".freeze, "term_mandel".freeze, "term_snow".freeze]
@@ -23,10 +23,10 @@ Gem::Specification.new do |s|
 
   s.specification_version = 4
 
-  s.add_development_dependency(%q<gem_hadar>.freeze, ["~> 1.15.0".freeze])
+  s.add_development_dependency(%q<gem_hadar>.freeze, ["~> 1.16.0".freeze])
   s.add_development_dependency(%q<simplecov>.freeze, [">= 0".freeze])
   s.add_development_dependency(%q<test-unit>.freeze, [">= 0".freeze])
   s.add_development_dependency(%q<utils>.freeze, [">= 0".freeze])
   s.add_runtime_dependency(%q<tins>.freeze, ["~> 1.0".freeze])
-  s.add_runtime_dependency(%q<mize>.freeze, [">= 0".freeze])
+  s.add_runtime_dependency(%q<mize>.freeze, ["~> 0.5".freeze])
 end
