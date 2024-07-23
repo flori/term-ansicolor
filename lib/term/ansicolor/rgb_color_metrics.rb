@@ -19,16 +19,16 @@ module Term
           if v <= 0.04045
             v / 12
           else
-            ( (v + 0.055) / 1.055) ** 2.4
+            ( (v + 0.055) / 1.055 ) ** 2.4
           end
         end
 
         def normalize_rgb_triple(rgb_triple)
           [
-            rgb_triple.red,
-            rgb_triple.green,
-            rgb_triple.blue
-          ].map { |v| normalize(v) }
+            normalize(rgb_triple.red),
+            normalize(rgb_triple.green),
+            normalize(rgb_triple.blue),
+          ]
         end
       end
     end

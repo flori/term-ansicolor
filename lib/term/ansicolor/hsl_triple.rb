@@ -2,7 +2,7 @@ module Term
   module ANSIColor
     class HSLTriple
       def self.from_rgb_triple(rgb)
-        ps = rgb.to_a.map { |x| x / 255.0 }
+        ps = [ rgb.red / 255.0, rgb.green / 255.0, rgb.blue / 255.0 ]
         p_min = ps.min
         p_max = ps.max
         p_red, p_green, p_blue = ps
