@@ -40,7 +40,7 @@ module Term
         Attribute.set :on_color4, 4, html: '#000080', background: true
         Attribute.set :on_color5, 5, html: '#800080', background: true
         Attribute.set :on_color6, 6, html: '#008080', background: true
-        Attribute.set :on_color7, 7, html: '#c0c0c0'
+        Attribute.set :on_color7, 7, html: '#c0c0c0', background: true
 
         Attribute.set :on_color8, 8, html: '#808080', background: true
         Attribute.set :on_color9, 9, html: '#ff0000', background: true
