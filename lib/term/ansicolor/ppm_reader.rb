@@ -53,11 +53,7 @@ module Term
       private
 
       def parse_row
-        row = []
-        @width.times do
-          row << parse_next_pixel
-        end
-        row
+        @width.times.map { parse_next_pixel }
       end
 
       def parse_next_pixel
