@@ -16,6 +16,9 @@ GemHadar do
   test_dir    'tests'
   ignore      '.*.sw[pon]', 'pkg', 'Gemfile.lock', '.rvmrc', 'coverage',
     'tags', '.bundle', '.byebug_history', 'errors.lst', 'cscope.out'
+  package_ignore '.all_images.yml', '.tool-versions', '.gitignore', 'VERSION',
+     '.utilsrc', '.rspec', 'TODO',
+     *Dir.glob('.github/**/*', File::FNM_DOTMATCH)
 
   readme      'README.md'
   executables.merge Dir['bin/*'].map { |x| File.basename(x) }
