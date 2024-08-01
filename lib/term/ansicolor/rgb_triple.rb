@@ -103,9 +103,7 @@ module Term
       end
 
       def html
-        s = '#'
-        @values.each { |c| s << '%02x' % c }
-        s
+        '#%02x%02x%02x' % @values
       end
 
       def css(percentage: false)

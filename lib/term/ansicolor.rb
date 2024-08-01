@@ -64,14 +64,14 @@ module Term
       elsif respond_to?(:to_str)
         to_str.gsub(COLORED_REGEXP, '')
       else
-        ''
+        ''.dup
       end.extend(Term::ANSIColor)
     end
 
     alias uncolored uncolor
 
     def apply_code(code, string = nil, &block)
-      result = ''
+      result = ''.dup
       result << "\e[#{code}m" if Term::ANSIColor.coloring?
       if block_given?
         result << yield.to_s
@@ -112,7 +112,7 @@ module Term
 
     class << self
       # Returns an array of all Term::ANSIColor attributes as symbols.
-      memoize method: def term_ansicolor_attributes
+      def term_ansicolor_attributes
         ::Term::ANSIColor::Attribute.attributes.map(&:name)
       end
 

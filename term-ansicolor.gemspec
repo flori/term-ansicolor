@@ -28,5 +28,4 @@ Gem::Specification.new do |s|
   s.add_development_dependency(%q<test-unit>.freeze, [">= 0".freeze])
   s.add_development_dependency(%q<utils>.freeze, [">= 0".freeze])
   s.add_runtime_dependency(%q<tins>.freeze, ["~> 1.0".freeze])
-  s.add_runtime_dependency(%q<mize>.freeze, ["~> 0.5".freeze])
 end

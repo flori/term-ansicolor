@@ -50,7 +50,6 @@ module Term
       end
 
       class << self
-        memoize method:
         def rgb_colors(options = {}, &block)
           colors = attributes.select(&:rgb_color?)
           if options.key?(:gray) && !options[:gray]
@@ -59,12 +58,10 @@ module Term
           colors.each(&block)
         end
 
-        memoize method:
         def rgb_foreground_colors(options = {}, &block)
           rgb_colors(options).reject(&:background?).each(&block)
         end
 
-        memoize method:
         def rgb_background_colors(options = {}, &block)
           rgb_colors(options).select(&:background?).each(&block)
         end

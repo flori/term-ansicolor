@@ -195,7 +195,7 @@ class ANSIColorTest < Test::Unit::TestCase
   end
 
   def test_frozen
-    string = 'foo'
+    string = 'foo'.dup
     red = string.red
     string.extend(Term::ANSIColor).freeze
     assert string.frozen?

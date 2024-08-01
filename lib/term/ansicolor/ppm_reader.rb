@@ -6,8 +6,12 @@ module Term
       def initialize(io, options = {})
         @io            = io
         @options       = options
-        @buffer        = ''
-        @true_coloring = options[:true_coloring]
+        @buffer        = ''.dup
+        if options[:true_coloring]
+          @color = -> pixel { on_color Attribute.true_color(pixel, @options) }
+        else
+          @color = -> pixel { on_color Attribute.nearest_rgb_color(pixel, @options) }
+        end
       end
 
       def reset_io
@@ -18,36 +22,32 @@ module Term
         parse_header
       end
 
-      def each_row
+      def rows
         reset_io
-        @height.times do
-          yield parse_row
+
+        Enumerator.new do |yielder|
+          @height.times do
+            yielder.yield parse_row
+          end
         end
       end
 
       def to_a
-        enum_for(:each_row).to_a
+        rows.to_a
       end
 
       def to_s
-        result = ''
-        each_row do |row|
+        rows.map do |row|
           last_pixel = nil
-          for pixel in row
+          row.map do |pixel|
             if pixel != last_pixel
-              color = if @true_coloring
-                        Attribute.true_color(pixel, @options)
-                      else
-                        Attribute.nearest_rgb_color(pixel, @options)
-                      end
-              result << on_color(color)
               last_pixel = pixel
+              @color.(pixel) << ' '
+            else
+              ' '
             end
-            result << ' '
-          end
-          result << reset << "\n"
-        end
-        result
+          end.join << reset << ?\n
+        end.join
       end
 
       private

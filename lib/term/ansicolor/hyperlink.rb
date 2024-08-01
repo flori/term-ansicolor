@@ -15,7 +15,7 @@ module Term
         end
         result = ''
         if Term::ANSIColor.coloring?
-          result = "\e]8;#{"id=#{id}" unless id.nil?};" << link.to_str << "\e\\"
+          result = "\e]8;#{"id=#{id}" unless id.nil?};".dup << link.to_str << "\e\\"
         end
         if block_given?
           result << yield.to_s

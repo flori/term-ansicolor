@@ -51,7 +51,7 @@ class HyperlinkTest < Test::Unit::TestCase
   end
 
   def test_with_stringy_self
-    string = 'foo'
+    string = 'foo'.dup
     string.extend Term::ANSIColor
     assert_equal "\e]8;;#@link\e\\foo\e]8;;\e\\", string.hyperlink(@link)
   end

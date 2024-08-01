@@ -16,7 +16,7 @@ script: &script |-
   ruby -v
   echo -e "\e[0m"
   bundle
-  rake test
+  rake test RUBYOPT="--enable-frozen-string-literal --debug-frozen-string-literal"
 
 images:
   ruby:3.3-alpine: *script
