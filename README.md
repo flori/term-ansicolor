@@ -16,7 +16,7 @@ Use rubygems to install the gem:
 
 The homepage of this library is located at
 
-* http://flori.github.com/term-ansicolor
+* https://github.com/flori/term-ansicolor
 
 ## Examples
 
@@ -29,10 +29,10 @@ The following executables are provided with Term::ANSIColor:
   programs are installed it can handle a lot of other image file formats.
 * `term_decolor`: decolors any text file that was colored with ANSI escape sequences
 * `term_mandel`: displays the mandelbrot set in the terminal
-* `term_snow`: displays falling snow in the terminal using ANSI movement
-  sequences.
 * `term_plasma`: draws a plasma effect on the console, possibly animated and
   refreshed every `-n seconds`.
+* `term_snow`: displays falling snow in the terminal using ANSI movement
+  sequences.
 
 
 Additionally the file examples/example.rb in the source/gem-distribution shows
