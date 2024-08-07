@@ -44,4 +44,4 @@ Florian Frank mailto:flori@ping.de
 
 ## License
 
-Apache License, Version 2.0 – See the COPYING file in the source archive.
+Apache License, Version 2.0 – See the LICENSE file in the source archive.
