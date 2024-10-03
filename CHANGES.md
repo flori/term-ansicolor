@@ -7,19 +7,18 @@
 ## 2024-08-01 v1.11.1
 
 * **New Version Features**
-	+ The library now works with the `--enable-string-literal` option even on ancient Rubies.
-	+ A working URL has been added.
-	+ Development files are ignored when creating a package.
+  + The library now works with the `--enable-string-literal` option even on ancient Rubies.
+  + A working URL has been added.
+  + Development files are ignored when creating a package.
 
 ## 2024-08-01 v1.11.0
 
-* **New Version**: 1.11.0
 * **Significant Changes**:
-	+ Refactor `parse_row` method to use more concise syntax
-	+ Add memoized versions of `rgb_colors` for foreground and background colors, improving performance by reducing calculations required to find the nearest color for a given RGB value
-	+ Update term-ansicolor gemspec to use gem_hadar 1.16.1
-	+ Use less map instead of other methods
-	+ Add new executable called `term_plasma` that draws a plasma effect on the console
+  + Refactor `parse_row` method to use more concise syntax
+  + Add memoized versions of `rgb_colors` for foreground and background colors, improving performance by reducing calculations required to find the nearest color for a given RGB value
+  + Update term-ansicolor gemspec to use `gem_hadar` **1.16.1**
+  + Use less map instead of other methods
+  + Add new executable called `term_plasma` that draws a plasma effect on the console
 
 ## 2024-07-15 v1.10.4
 
@@ -28,7 +27,6 @@
 
 ## 2024-07-15 v1.10.3
 
-* **New Version**: Bumped version.
 * **Display Resolution**: Doubled the display resolution.
 * **Code Improvements**: Improved code and coverage.
 * **Documentation**: Added documentation for `term_snow` command.
@@ -37,8 +35,8 @@
 ## 2024-06-22 v1.10.2
 
 * Increase compactibility with older Rubies:
-	+ Don't use new features
-	+ Allow testing on ancient Rubies
+  + Don't use new features
+  + Allow testing on ancient Rubies
 
 ## 2024-06-22 v1.10.1
 
@@ -50,38 +48,38 @@
 ## 2024-06-21 v1.10.0
 
 * **New Features**
-	+ Add support for overline and underline with different types and colors.
-	+ Add some more codes for text.
+  + Add support for overline and underline with different types and colors.
+  + Add some more codes for text.
 * **Improvements**
-	+ Remove ordering hack for ruby < 1.9
-	+ Make grey color block more compact
+  + Remove ordering hack for ruby < 1.9
+  + Make grey color block more compact
 * **Refactoring**
-	+ Remove and use global config
+  + Remove and use global config
 
 ## 2024-06-18 v1.9.0
 
 * **New Features**
-	+ Add true color support
-	+ Add `.utilsrc`
+  + Add true color support
+  + Add `.utilsrc`
 * **Bug Fixes**
-	+ Fix the wind (oops)
+  + Fix the wind (oops)
 * **Miscellaneous Changes**
-	+ Require `test_helper`
-	+ Ignore `errors.lst`
+  + Require `test_helper`
+  + Ignore `errors.lst`
 
 ## 2024-04-14 v1.8.0
 
 * **New Features**
-	+ Added support for hyperlinks
-	+ Updated Ruby version to 3.3
+  + Added support for hyperlinks
+  + Updated Ruby version to 3.3
 
 ## 2024-03-15 v1.7.2
 
 * **New Version Features**
-	+ Use GitHub as homepage
-	+ Test compatibility with Ruby 3.2.0
-	+ Do not require Ruby, it's broken sometimes (development dependency removed)
-	+ Update CI/CD to use All Images instead of Travis
+  + Use GitHub as homepage
+  + Test compatibility with Ruby 3.2.0
+  + Do not require Ruby, it's broken sometimes (development dependency removed)
+  + Update CI/CD to use All Images instead of Travis
 
 ## 2019-01-18 v1.7.1
 
@@ -99,8 +97,8 @@
 
 * Change to Apache 2.0 license
 * **New Features**
-	+ Implemented HSL (Hue, Saturation, Lightness) color support
-	+ Added several new methods for working with colors
+  + Implemented HSL (Hue, Saturation, Lightness) color support
+  + Added several new methods for working with colors
 
 ## 2017-03-24 v1.4.1
 
@@ -179,8 +177,8 @@ related HTML colors.
 ## 2011-10-19 v1.0.8
 
 * **Changes in Documentation**
-	+ Updated CHANGES file
-	+ Cleaned up documentation
+  + Updated CHANGES file
+  + Cleaned up documentation
 
 ## 2011-10-13 v1.0.7
 
@@ -238,7 +236,7 @@ related HTML colors.
 * Added uncolored method as suggested by Thomas Husterer <Thomas.Husterer@heidelberg.com>
 * Added attribute methods with string arguments
 * Deleted now unused files
-                   
+
 ## 2002-07-27 v0.0.2
 
 * Minor Code Cleanup
