@@ -1,5 +1,21 @@
 # Changes
 
+## 2025-09-11 v1.11.3
+
+- Added `fail_fast: true` configuration option
+- Removed `ruby:3.0-alpine` from the images list
+- Changed `s.date` from **2024-09-13** to **1980-01-02**
+- Removed GitHub-specific files from ignore list
+- Removed binary file detection configuration
+- Updated Dockerfile and script to modernize dependencies and build process
+- Removed obsolete `CHANGES` file and updated gemspec to exclude it
+- Added `debug` and `all_images` as development dependencies
+- Added `CHANGES.md` to the list of files in term-ansicolor.gemspec
+- Used markdown for CHANGES file
+- Updated gemspec
+- Renamed license file
+- Removed superfluous require statement that fixes issue #41
+
 ## 2024-08-04 v1.11.2
 
 * Removed unnecessary `require` statement.
