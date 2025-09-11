@@ -17,8 +17,7 @@ GemHadar do
   ignore      '.*.sw[pon]', 'pkg', 'Gemfile.lock', '.rvmrc', 'coverage',
     'tags', '.bundle', '.byebug_history', 'errors.lst', 'cscope.out'
   package_ignore '.all_images.yml', '.tool-versions', '.gitignore', 'VERSION',
-     '.utilsrc', '.rspec', 'TODO',
-     *Dir.glob('.github/**/*', File::FNM_DOTMATCH)
+     '.utilsrc', '.rspec', 'TODO'
 
   readme      'README.md'
   executables.merge Dir['bin/*'].map { |x| File.basename(x) }
