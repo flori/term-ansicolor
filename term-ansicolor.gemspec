@@ -23,10 +23,10 @@ Gem::Specification.new do |s|
 
   s.specification_version = 4
 
-  s.add_development_dependency(%q<gem_hadar>.freeze, ["~> 2.3".freeze])
+  s.add_development_dependency(%q<gem_hadar>.freeze, ["~> 2.4".freeze])
   s.add_development_dependency(%q<simplecov>.freeze, [">= 0".freeze])
   s.add_development_dependency(%q<test-unit>.freeze, [">= 0".freeze])
   s.add_development_dependency(%q<debug>.freeze, [">= 0".freeze])
-  s.add_development_dependency(%q<all_images>.freeze, [">= 0".freeze])
-  s.add_runtime_dependency(%q<tins>.freeze, ["~> 1.0".freeze])
+  s.add_development_dependency(%q<all_images>.freeze, ["~> 0.8".freeze])
+  s.add_runtime_dependency(%q<tins>.freeze, ["~> 1".freeze])
 end

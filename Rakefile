@@ -22,9 +22,9 @@ GemHadar do
   readme      'README.md'
   executables.merge Dir['bin/*'].map { |x| File.basename(x) }
 
-  dependency             'tins', '~>1.0'
+  dependency             'tins',     '~>1'
   development_dependency 'simplecov'
   development_dependency 'test-unit'
   development_dependency 'debug'
-  development_dependency 'all_images'
+  development_dependency 'all_images', '~> 0.8'
 end
