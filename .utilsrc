@@ -8,7 +8,6 @@ end
 discover do
   prune_dirs /\A(\.svn|\.git|CVS|tmp|tags|coverage|pkg)\z/
   skip_files /(\A\.|\.sw[pon]\z|\.log\z|~\z)/
-  binary false
 end
 
 strip_spaces do
