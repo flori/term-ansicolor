@@ -17,13 +17,13 @@ Gem::Specification.new do |s|
   s.homepage = "https://github.com/flori/term-ansicolor".freeze
   s.licenses = ["Apache-2.0".freeze]
   s.rdoc_options = ["--title".freeze, "Term-ansicolor - Ruby library that colors strings using ANSI escape sequences".freeze, "--main".freeze, "README.md".freeze]
-  s.rubygems_version = "3.6.9".freeze
+  s.rubygems_version = "4.0.2".freeze
   s.summary = "Ruby library that colors strings using ANSI escape sequences".freeze
   s.test_files = ["tests/ansicolor_test.rb".freeze, "tests/attribute_test.rb".freeze, "tests/hsl_triple_test.rb".freeze, "tests/hyperlink_test.rb".freeze, "tests/ppm_reader_test.rb".freeze, "tests/rgb_color_metrics_test.rb".freeze, "tests/rgb_triple_test.rb".freeze, "tests/test_helper.rb".freeze]
 
   s.specification_version = 4
 
-  s.add_development_dependency(%q<gem_hadar>.freeze, ["~> 2.4".freeze])
+  s.add_development_dependency(%q<gem_hadar>.freeze, [">= 2.16.3".freeze])
   s.add_development_dependency(%q<simplecov>.freeze, [">= 0".freeze])
   s.add_development_dependency(%q<test-unit>.freeze, [">= 0".freeze])
   s.add_development_dependency(%q<debug>.freeze, [">= 0".freeze])
