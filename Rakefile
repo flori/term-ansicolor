@@ -22,6 +22,10 @@ GemHadar do
   readme      'README.md'
   executables.merge Dir['bin/*'].map { |x| File.basename(x) }
 
+  changelog do
+    filename 'CHANGES.md'
+  end
+
   dependency             'tins',     '~>1'
   development_dependency 'simplecov'
   development_dependency 'test-unit'
