@@ -15,7 +15,7 @@ GemHadar do
 
   test_dir    'tests'
   ignore      '.*.sw[pon]', 'pkg', 'Gemfile.lock', '.rvmrc', 'coverage',
-    'tags', '.bundle', '.byebug_history', 'errors.lst', 'cscope.out'
+    'tags', '.bundle', '.byebug_history', 'errors.lst', 'cscope.out', '.yardoc'
   package_ignore '.all_images.yml', '.tool-versions', '.gitignore', 'VERSION',
      '.utilsrc', '.rspec', 'TODO'
 

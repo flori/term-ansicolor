@@ -2,6 +2,7 @@
 .bundle
 .byebug_history
 .rvmrc
+.yardoc
 Gemfile.lock
 coverage
 cscope.out
