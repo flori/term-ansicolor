@@ -1,5 +1,25 @@
 # Changes
 
+## 2026-11-19 v1.12.0
+
+### Improvements
+
+- Added `.yardoc` to `.gitignore` and the `Rakefile` ignore list.
+- Added changelog generation support to the `Rakefile` using `GemHadar`,
+  outputting to `CHANGES.md`.
+- Updated `lib/term/ansicolor/version.rb` with auto-generated header comments
+  and updated constant documentation.
+- Removed stale vim modelines from `Gemfile` and `Rakefile`.
+
+### Build & CI
+
+- Added Ruby **4.0** support to the CI configuration in `.all_images.yml`.
+- Added `openssl-dev` to the Docker image dependencies.
+- Changed the `bundle update` command in the CI script to `bundle update
+  --all`.
+- Updated `rubygems_version` in `term-ansicolor.gemspec` to **4.0.24**.
+- Updated the minimum `gem_hadar` development dependency to **2.24.1**.
+
 ## 2025-09-11 v1.11.3
 
 - Added `fail_fast: true` configuration option
